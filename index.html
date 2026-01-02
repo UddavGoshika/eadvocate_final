@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -25,7 +27,7 @@
 
     <!-- Sub Navbar -->
     <div class="sub-navbar">
-            <marquee>Welcome to E-Advocate Services 💡</marquee>
+            <marquee>⚖️ Welcome to e-Advocate Services , Where Justice is Digitized </marquee>
 
       <button id="font-minus">A-</button>
       <button id="font-plus">A+</button>
@@ -41,9 +43,9 @@
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#" onclick="openbrowseprofiles()">Browse Files</a></li>
-        <li><a href="https://filing.ecourts.gov.in/pdedev/">File a Case</a></li>
-        <li><a href="https://services.ecourts.gov.in/ecourtindia_v6/">Case Status</a></li>
-        <li><a href="#blog">Blogs</a></li>
+        <li><a href="https://filing.ecourts.gov.in/pdedev/" target="_blank" rel="noopener noreferrer">File a Case</a></li>
+        <li><a href="https://services.ecourts.gov.in/ecourtindia_v6/" target="_blank" rel="noopener noreferrer">Case Status</a></li>
+        <li><a href="#mainblogs">Blogs</a></li>
         <li><a href="#about">About</a></li>
             
 
@@ -51,11 +53,30 @@
         <li><input type="search" id="site-search" class="searchbar"name="q" placeholder="Enter search terms..."></li>
         <!--  -->
 
-
         <li><a href="#" class="loginnav" onclick="openAuth('login')">Login</a></li>
         <li><a href="#" class="registernav" onclick="openAuth('register')">Register</a></li>
 
+        <!-- <li class="accountnav" style="display:none;">
+          <a href="#dashboard">My Account</a>
+        </li> -->
 
+        <li class="profile-nav">
+          <div class="profile-wrapper">
+
+            <div class="profile-trigger" id="profileTrigger">
+              <span class="avatar" id="avatarInitials">U</span>
+              <span class="profile-label">My Account</span>
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <a href="#dashboard">Dashboard</a>
+              <a href="#myprofile">My Profile</a>
+              <a href="#settings">Settings</a>
+              <button id="logoutBtn">Logout</button>
+            </div>
+
+          </div>
+        </li>
 
 
 
@@ -114,14 +135,6 @@
     <form id="loginForm" class="auth-form active">
 
 
-         <div class="form-group">
-      <label>Role</label>
-      <select id="loginRole">
-        <option>Client</option>
-        <option>Advocate</option>
-        <option>Admin</option>
-      </select>
-    </div>
 
 
       <div class="form-group">
@@ -579,6 +592,126 @@
 </div>
 
 
+<template id="myprofile">
+
+<!-- My Profile Page -->
+        <div id="my-profile" class="ea-page active">
+            <div class="ea-section">
+                <div class="ea-profile-header">
+                    <img id="profile-avatar" src="https://headshots-inc.com/wp-content/uploads/2023/01/what-to-wear-for-professional-headshots-male-executive-1024x683.jpg" alt="Profile Avatar" class="ea-profile-avatar" onclick="document.getElementById('avatar-upload').click()">
+                    <input type="file" id="avatar-upload" accept="image/*" style="display:none;" onchange="uploadAvatar(this)">
+                    <div class="ea-profile-info">
+                        <h1 id="profile-name">Alex Rivera</h1>
+                        <p id="profile-role">Senior Client • Premium Member</p>
+                        <span class="ea-badge">Verified User</span>
+                    </div>
+                </div>
+
+                <div class="ea-grid">
+                    <div>
+                        <h2>About Me</h2>
+                        <textarea id="profile-bio" rows="4" readonly>Corporate executive seeking expert legal counsel for mergers, contracts, and compliance. Active on the platform since 2024.</textarea>
+                        <button class="ea-btn" style="margin-top:1rem;" onclick="editField('profile-bio')">Edit Bio</button>
+                        <h3>Practice Areas of Interest</h3>
+                        <div id="profile-tags" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1rem;">
+                            <span class="ea-tag">Corporate Law</span>
+                            <span class="ea-tag">M&A</span>
+                            <span class="ea-tag">Contracts</span>
+                        </div>
+                        <button class="ea-btn" style="margin-top:1rem;" onclick="openModal('tags-modal')">Manage Tags</button>
+                    </div>
+                    <div>
+                        <h2>Contact Information</h2>
+                        <p><strong>Email:</strong> <span id="profile-email">alex.rivera@company.com</span></p>
+                        <p><strong>Phone:</strong> <span id="profile-phone">+1 (555) 123-4567</span></p>
+                        <p><strong>Location:</strong> <span id="profile-location">New York, USA</span></p>
+                        <button class="ea-btn" style="margin-top:2rem;" onclick="openModal('edit-contact-modal')">Edit Contact</button>
+                    </div>
+                </div>
+
+                <h2 style="margin-top:3rem;">Recent Activity</h2>
+                <ul style="list-style:none; padding:0;">
+                    <li>Connected with Elena Martinez • 2 hours ago</li>
+                    <li>Updated case #2025-018 • Yesterday</li>
+                    <li>Viewed 5 lawyer profiles • 3 days ago</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+</template>
+
+<template id="settings">
+
+
+        <div id="settings" class="ea-page">
+            <div class="ea-section">
+                <h1 style="font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:2rem;">Account Settings</h1>
+
+                <h2>General</h2>
+                <div class="ea-form-group">
+                    <label for="display-name">Display Name</label>
+                    <input type="text" id="display-name" value="Alex Rivera">
+                </div>
+                <div class="ea-grid">
+                    <div class="ea-form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="alex.rivera@company.com">
+                    </div>
+                    <div class="ea-form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" value="+1 (555) 123-4567">
+                    </div>
+                </div>
+
+                <h2 style="margin-top:2rem;">Notifications</h2>
+                <div class="ea-settings-toggle">
+                    <span>New Matches Alerts</span>
+                    <div id="toggle-matches" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div class="ea-settings-toggle">
+                    <span>Message Notifications</span>
+                    <div id="toggle-messages" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div class="ea-settings-toggle">
+                    <span>Case Update Emails</span>
+                    <div id="toggle-cases" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                </div>
+
+                <h2 style="margin-top:2rem;">Security</h2>
+                <div class="ea-settings-toggle">
+                    <span>Two-Factor Authentication (2FA)</span>
+                    <div id="toggle-2fa" class="toggle-switch active" onclick="toggle2FA(this)"></div>
+                </div>
+                <button class="ea-btn" style="margin-top:1rem;" onclick="openModal('change-password-modal')">Change Password</button>
+                <p style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-top:1rem;">Last password change: 3 months ago. Use strong passwords (min 12 chars, mix of letters/numbers/symbols).</p>
+
+                <h2 style="margin-top:2rem;">Privacy</h2>
+                <div class="ea-settings-toggle">
+                    <span>Make Profile Public to Lawyers</span>
+                    <div id="toggle-public" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div class="ea-settings-toggle">
+                    <span>Share Activity Data Anonymously</span>
+                    <div id="toggle-data" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                </div>
+                <button class="ea-btn" onclick="openModal('data-request-modal')">Request Data Export</button>
+
+                <h2 style="margin-top:2rem;">Subscription & Billing</h2>
+                <p>Premium Plan • $19.99/month • Next billing: Feb 01, 2026</p>
+                <button class="ea-btn" onclick="openModal('billing-modal')">Manage Subscription</button>
+
+                <h2 style="margin-top:2rem; color:#ff4757;">Danger Zone</h2>
+                <button class="ea-btn danger" onclick="openModal('delete-account-modal')">Delete Account</button>
+                <p style="font-size:0.85rem; color:#ff4757; margin-top:1rem;">Warning: This action is irreversible and will delete all your data.</p>
+
+                <button class="ea-btn" style="margin-top:3rem;" onclick="saveSettings()">Save All Changes</button>
+            </div>
+        </div>
+
+</template>
+
 
 
 <!-- main first page home -->
@@ -601,15 +734,18 @@
 
 
       <h1 class="hero-title">
-        Your Trusted
-        Legal Partner
-      </h1>
+e-Advocate Services      </h1>
 
       <p class="hero-subtitle">
-        Expert legal consultation and advocacy services delivered digitally. Get professional legal help from certified advocates, anytime, anywhere.
-      </p>
+A secure digital bridge between clients and independent advocates. Discover trusted professionals, connect instantly, and communicate with confidence through a neutral, technology-enabled platform.      </p>
 
-      <div class="hero-buttons">
+
+
+      <a href="#" class="loginnav" onclick="openAuth('login')">Login</a>
+      <a href="#" class="registernav" onclick="openAuth('register')">Register</a>
+
+
+      <!-- <div class="hero-buttons">
         <a href="#" class="btn-primary">
           Book Consultation
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -622,106 +758,154 @@
           </svg>
           Watch Demo
         </a>
-      </div>
+      </div> -->
 
       <div class="stats">
         <div class="stat-item">
-          <span class="stat-number">99%</span>
-          <span class="stat-label">Success Rate</span>
+          <span class="stat-number"></span>
+          <span class="stat-label"></span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Availability</span>
+          <span class="stat-number"></span>
+          <span class="stat-label"></span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Expert Lawyers</span>
+          <span class="stat-number"></span>
+          <span class="stat-label"></span>
         </div>
       </div>
     </div>
 
     <!-- Right Image -->
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop&crop=faces,center" alt="Professional legal consultation">
+    <!-- <div class="hero-image"> -->
+      <!-- <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop&crop=faces,center" alt="Professional legal consultation"> -->
 
-      <div class="notification-badge">
+      <!-- <div class="notification-badge">
         Case Won<br>
         <strong>Fastest Resolution in 48hrs</strong>
+      </div> -->
+<section class="case-slider">
+
+  <div class="case-slider-container">
+
+    <!-- SLIDE 1 -->
+    <div class="case-slide active">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f" alt="Search by Party Name">
+
+      <div class="case-slide-content">
+        <h2>Search by Party Name</h2>
+        <p>
+          Find your case status using the petitioner or respondent name.
+          This method is useful when you do not have a case or filing number.
+        </p>
+
+        <button class="case-btn">
+          Search by Party Name →
+        </button>
       </div>
     </div>
 
+    <!-- SLIDE 2 -->
+    <div class="case-slide">
+      <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab" alt="Search by Case Number">
 
-</section>
+      <div class="case-slide-content">
+        <h2>Search by Case / Filing Number</h2>
+        <p>
+          Access detailed case status using your case number or filing number
+          as registered with the court.
+        </p>
 
-
-<!-- second page -->
-
-
-<section class="legal-services">
-  <h2 class="section-title">Comprehensive Legal Solutions</h2>
-  <p class="section-subtitle">
-    From consultation to representation, we provide complete legal services tailored to your specific needs.
-  </p>
-
-  <div class="service-grid">
-
-    <!-- 1 -->
-    <div class="service-card">
-      <div class="icon" style="background:#3b82f6;">
-        ⚖️
+        <button class="case-btn">
+          Search by Case Number →
+        </button>
       </div>
-      <h3>Legal Consultation</h3>
-      <p>Get expert legal advice from experienced advocates on any legal matter.</p>
     </div>
 
-    <!-- 2 - highlighted center -->
-    <div class="service-card">
-      <div class="icon" style="background:#8b5cf6;">
-        📄
+    <!-- SLIDE 3 -->
+    <div class="case-slide">
+      <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c" alt="Search by Advocate or FIR">
+
+      <div class="case-slide-content">
+        <h2>Search by Advocate / FIR / Act</h2>
+        <p>
+          Locate case information using advocate name, FIR number,
+          or applicable act where supported.
+        </p>
+
+        <button class="case-btn">
+          Explore Search Options →
+        </button>
       </div>
-      <h3>Document Review</h3>
-      <p>Professional review and drafting of legal documents and contracts.</p>
     </div>
 
-    <!-- 3 -->
-    <div class="service-card">
-      <div class="icon" style="background:#22c55e;">
-        👥
-      </div>
-      <h3>Court Representation</h3>
-      <p>Skilled representation in courts with a proven track record of success.</p>
+    <!-- CONTROLS -->
+    <div class="case-controls">
+      <button onclick="prevSlide()">❮</button>
+      <button onclick="nextSlide()">❯</button>
     </div>
 
-    <!-- 4 -->
-    <div class="service-card">
-      <div class="icon" style="background:#f97316;">
-        🛡️
-      </div>
-      <h3>Legal Protection</h3>
-      <p>Comprehensive legal protection plans for individuals and businesses.</p>
-    </div>
-
-    <!-- 5 -->
-    <div class="service-card">
-      <div class="icon" style="background:#ef4444;">
-        ⏱️
-      </div>
-      <h3>24/7 Support</h3>
-      <p>Round-the-clock legal support for urgent matters and emergencies.</p>
-    </div>
-
-    <!-- 6 -->
-    <div class="service-card">
-      <div class="icon" style="background:#6366f1;">
-        💼
-      </div>
-      <h3>Corporate Law</h3>
-      <p>Complete corporate legal services from formation to compliance.</p>
+    <!-- DOTS -->
+    <div class="case-dots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
     </div>
 
   </div>
 </section>
 
+
+
+    <!-- </div> -->
+
+
+</section>
+
+<!-- filterr advocates -->
+
+
+<section class="advocate-section">
+  <h2>Find Expert Advocates</h2>
+  <p class="advocate-subtitle">Search, filter, and connect with top-rated legal professionals.</p>
+
+  <div class="blogsection">   
+
+  <!-- Filters -->
+  <div class="filters">
+    <select id="filter-location">
+      <option value="">Location</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Bangalore">Bangalore</option>
+    </select>
+
+    <select id="filter-experience">
+      <option value="">Experience</option>
+      <option value="5">5+ Years</option>
+      <option value="10">10+ Years</option>
+      <option value="15">15+ Years</option>
+    </select>
+
+    <select id="filter-specialization">
+      <option value="">Specialization</option>
+      <option value="Corporate Law">Corporate Law</option>
+      <option value="Criminal Defense">Criminal Defense</option>
+      <option value="Family Law">Family Law</option>
+    </select>
+
+    <button onclick="applyFilters()">Apply Filters</button>
+  </div>
+  
+  <!-- Advocates List -->
+  <div id="advocates-container" class="advocates-grid"></div>
+
+  </div>
+</section>
+
+
+
+<!-- file a case and section 3rd page  -->
 
 <section class="eadvocate-section">
     <h2 class="section-title">e-Advocate Services</h2>
@@ -772,65 +956,23 @@
     </div>
   </section>
 
-<!-- filterr advocates -->
-
-
-<section class="advocate-section">
-  <h2>Find Expert Advocates</h2>
-  <p class="advocate-subtitle">Search, filter, and connect with top-rated legal professionals.</p>
-
-  <div class="blogsection">   
-
-  <!-- Filters -->
-  <div class="filters">
-    <select id="filter-location">
-      <option value="">Location</option>
-      <option value="Mumbai">Mumbai</option>
-      <option value="Delhi">Delhi</option>
-      <option value="Bangalore">Bangalore</option>
-    </select>
-
-    <select id="filter-experience">
-      <option value="">Experience</option>
-      <option value="5">5+ Years</option>
-      <option value="10">10+ Years</option>
-      <option value="15">15+ Years</option>
-    </select>
-
-    <select id="filter-specialization">
-      <option value="">Specialization</option>
-      <option value="Corporate Law">Corporate Law</option>
-      <option value="Criminal Defense">Criminal Defense</option>
-      <option value="Family Law">Family Law</option>
-    </select>
-
-    <button onclick="applyFilters()">Apply Filters</button>
-  </div>
-  
-  <!-- Advocates List -->
-  <div id="advocates-container" class="advocates-grid"></div>
-
-  </div>
-</section>
-
 
 
 
 
 <!-- how it works -->
-
+<!-- 
 <section class="howitworks">
   <div class="hiw-wrap">
 
     <span class="hiw-badge">How It Works</span>
-    <h2>Simple & Efficient Process</h2>
+    <h2 style="color:white;">Simple & Efficient Process</h2>
     <p class="hiw-desc">
       Get started with our streamlined legal services in just four easy steps.
     </p>
 
     <div class="hiw-row">
 
-      <!-- Step 1 -->
       <div class="hiw-card">
         <div class="hiw-icon">
           👤
@@ -842,7 +984,6 @@
 
       <span class="hiw-line"></span>
 
-      <!-- Step 2 -->
       <div class="hiw-card">
         <div class="hiw-icon">
           💬
@@ -854,7 +995,6 @@
 
       <span class="hiw-line"></span>
 
-      <!-- Step 3 -->
       <div class="hiw-card">
         <div class="hiw-icon">
           📄
@@ -866,7 +1006,6 @@
 
       <span class="hiw-line"></span>
 
-      <!-- Step 4 -->
       <div class="hiw-card">
         <div class="hiw-icon">
           ✔
@@ -879,12 +1018,12 @@
     </div>
   </div>
 </section>
-
+ -->
 
 <!-- practice page -->
 
 
-
+<!-- 
 <section class="practice-areas">
   <div class="pa-container">
 
@@ -955,7 +1094,7 @@
     </div>
   </div>
 </section>
-
+ -->
 
 
 
@@ -972,13 +1111,18 @@
   </div>  
 </section>
 
+
+
+
+
+
 <!-- testmonials  -->
 
 <section class="testimonials">
   <div class="tm-container">
 
     <span class="tm-pill">Testimonials</span>
-    <h2>What Our Clients Say</h2>
+    <h2 >What Our Clients Say</h2>
     <p class="tm-subtitle">
       Don't just take our word for it. Here's what our satisfied clients have to say.
     </p>
@@ -1048,7 +1192,7 @@
 <section class="faq-section">
 
   <span class="faq-badge">FAQ</span>
-  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <h2 class="faq-title" style="color:white;">Frequently Asked Questions</h2>
   <p class="faq-subtitle">
     Find answers to common questions about our e-advocate services.
   </p>
@@ -1139,17 +1283,15 @@
 
 
 <!-- ready to connect -->
-
+<!-- 
 <section class="contact-section">
 
-  <!-- Header -->
   <span class="contact-badge">Get in Touch</span>
-  <h2 class="contact-title">Ready to Get Started?</h2>
+  <h2 class="contact-title" style="color:white;">Ready to Get Started?</h2>
   <p class="contact-sub">
     Have questions? Our team is here to help. Contact us for a free consultation.
   </p>
 
-  <!-- Contact Cards -->
   <div class="contact-cards">
 
     <div class="contact-card">
@@ -1175,7 +1317,6 @@
 
   </div>
 
-  <!-- Contact Form -->
   <div class="contact-form-box">
     <form id="contactForm">
 
@@ -1218,9 +1359,349 @@
     </form>
   </div>
 
+</section> -->
+
+
+
+<section class="contact-elite page" id="contacts">
+  <div class="contact-stage">
+
+    <!-- BRAND STORY PANEL -->
+    <div class="contact-story">
+      <span class="eyebrow">Contact E-Advocate Services</span>
+
+      <h1>
+        Let’s Start a <br>
+        <span>Meaningful Conversation</span>
+      </h1>
+
+      <p class="story-desc">
+        Whether you’re exploring our services, looking to partner, 
+        or interested in a franchise opportunity — our team is ready 
+        to assist you with clarity and commitment.
+      </p>
+
+      <div class="story-cards">
+
+        <div class="story-card">
+          <h4>📞 Phone</h4>
+          <a href="tel:+917093704706">+91 70937 04706</a>
+        </div>
+
+        <div class="story-card">
+          <h4>📧 Email</h4>
+          <a href="mailto:tatitoprojects@gmail.com">tatitoprojects@gmail.com</a>
+          <a href="mailto:support@tatitoprojects.com">support@tatitoprojects.com</a>
+        </div>
+
+        <div class="story-card">
+          <h4>📍 Location</h4>
+          <p>Tirupati, Andhra Pradesh 517501, India</p>
+        </div>
+
+      </div>
+
+      <!-- FRANCHISE CTA -->
+      <!-- <div class="franchise-panel">
+        <h3>Interested in a Franchise?</h3>
+        <p>
+          Join the Tatito Ecosystem and build a scalable, 
+          future-ready business with our multi-service platform.
+        </p>
+        <a href="#franchise" onclick="switchPage('franchise')"class="franchise-action">
+          Apply for Franchise →
+        </a>
+      </div> -->
+
+
+
+      <div class="franchise-panel premium-panel">
+  <h3>Unlock Advanced e-Advocate Features</h3>
+
+  <p>
+    Upgrade to Premium to access enhanced visibility, priority discovery,
+    and advanced digital tools designed to support independent advocates.
+  </p>
+
+  <ul class="premium-points grid-2">
+    <li>✔ Priority profile visibility to users</li>
+    <li>✔ Enhanced profile & practice details</li>
+    <li>✔ Advanced client communication tools</li>
+    <li>✔ Analytics & engagement insights</li>
+  </ul>
+
+  <a href="#subscription" onclick="switchPage('subscription')" class="franchise-action premium-action">
+    Upgrade to Premium →
+  </a>
+
+  <span class="premium-note">
+    Tatito is a technology platform only. No legal advice or consultation is provided.
+  </span>
+</div>
+
+
+      
+          <div class="social-links">
+            <a href="#" aria-label="Twitter">𝕏</a>
+  <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+
+  <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+
+  <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+  <a href="https://wa.me/919XXXXXXXXX" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="mailto:info@yourdomain.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+          </div>
+
+
+
+    </div>
+
+    <!-- FORM PANEL -->
+    <div class="contact-form-elite">
+      <h2>Send Us a Message</h2>
+      <p class="form-note">We typically respond within 24 hours.</p>
+
+      <form id="eliteContactForm">
+
+        <div class="input-grid">
+          <input type="text" placeholder="Full Name" required>
+          <input type="email" placeholder="Email Address" required>
+        </div>
+
+        <input type="tel" placeholder="Phone Number">
+
+        <select required>
+          <option value="">Select Inquiry Type</option>
+          <option>Franchise</option>
+          <option>Services</option>
+          <option>Partnership</option>
+          <option>Support</option>
+        </select>
+
+        <textarea rows="5" placeholder="Tell us how we can help you…" required></textarea>
+
+        <button type="submit">
+          Send Message
+        </button>
+
+        <span class="form-feedback" id="eliteFormStatus"></span>
+
+      </form>
+
+<h2>Office Address</h2>
+  <div class="map-wrapper">
+    <!-- iframe here -->
+     <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.5450074228506!2d79.43590019999999!3d13.624577799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b085e6780cf%3A0x32b866f5776709de!2sTATITO%20PROJECTS!5e0!3m2!1sen!2sin!4v1766521135675!5m2!1sen!2sin"
+    width="90%"
+    height="450"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+  </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
 </section>
 
+
+
+
+
 </template>
+
+<template id="mainblogs">
+
+<section class="blg-container">
+
+
+
+<div class="blg-progress">
+  <span id="blg-progress-bar"></span>
+</div>
+
+
+
+  <!-- BLOG LIST -->
+  <aside class="blg-sidebar">
+
+<div class="haed" style="display:flex; gap:20px;">
+  <div class="back">     
+  <i class="fa fa-arrow-left" aria-hidden="true" id="backblog" onclick="backblog()" style="cursor:pointer;"></i>
+  </div>
+  
+  <div class="inshigh">
+       <h3>  Insights</h3>
+</div>
+</div>
+      <div class="blg-controls">
+        <input type="text" id="blg-search" placeholder="Search blogs..." oninput="filterBlogs()">
+
+        <select id="blg-category" onchange="filterBlogs()">
+          <option value="">All Categories</option>
+          <option value="Platform">Platform</option>
+          <option value="Technology">Technology</option>
+          <option value="Guide">Guide</option>
+          <option value="Compliance">Compliance</option>
+        </select>
+      </div>
+
+
+    <ul id="blg-list">
+      <li class="active" onclick="loadBlog(0)">Building Trust in Digital Platforms</li>
+      <li onclick="loadBlog(1)">How Legal Tech Is Evolving</li>
+      <li onclick="loadBlog(2)">Choosing the Right Advocate Online</li>
+      <li onclick="loadBlog(3)">Security & Privacy in Legal Platforms</li>
+    </ul>
+  </aside>
+
+  <!-- BLOG CONTENT -->
+  <main class="blg-content">
+    <h1 id="blg-title"></h1>
+    <p class="blg-meta" id="blg-meta"></p>
+
+    <article id="blg-body"></article>
+
+    <!-- NAVIGATION -->
+    <div class="blg-nav">
+      <button onclick="prevBlog()">← Previous</button>
+      <span id="blg-counter"></span>
+      <button onclick="nextBlog()">Next →</button>
+    </div>
+  </main>
+
+</section>
+
+
+
+</template>
+
+<template id="subscription">
+
+  <section class="sub-hero">
+  <h1>Plans for Every Legal Need</h1>
+  <p>
+    Scalable, secure, and enterprise-ready subscriptions designed for individuals,
+    advocates, firms, and institutions.
+  </p>
+</section>
+
+<section class="sub-plans">
+
+  <!-- BASIC -->
+  <div class="sub-card">
+    <h3>Basic</h3>
+    <p class="sub-price">₹0<span>/month</span></p>
+    <p class="sub-desc">For citizens exploring legal services digitally.</p>
+
+    <ul>
+      <li>✔ Browse Advocates</li>
+      <li>✔ Masked Identity Access</li>
+      <li>✔ Case Status Lookup</li>
+      <li>✖ Analytics Dashboard</li>
+      <li>✖ Priority Support</li>
+    </ul>
+
+    <button class="sub-btn-outline">Get Started</button>
+  </div>
+
+  <!-- PRO -->
+  <div class="sub-card featured">
+    <span class="badge">Most Popular</span>
+    <h3>Professional</h3>
+    <p class="sub-price">₹1,499<span>/month</span></p>
+    <p class="sub-desc">For advocates and professionals growing digitally.</p>
+
+    <ul>
+      <li>✔ Verified Advocate Listing</li>
+      <li>✔ Client Interest Requests</li>
+      <li>✔ Secure Messaging</li>
+      <li>✔ Performance Analytics</li>
+      <li>✔ Priority Email Support</li>
+    </ul>
+
+    <button class="sub-btn-primary" id="#subscription">Upgrade to Pro</button>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="sub-card">
+    <h3>Enterprise</h3>
+    <p class="sub-price">Custom</p>
+    <p class="sub-desc">For law firms, courts, and institutions.</p>
+
+    <ul>
+      <li>✔ Firm-Wide Access Control</li>
+      <li>✔ Advanced Case Analytics</li>
+      <li>✔ Dedicated Account Manager</li>
+      <li>✔ API & System Integrations</li>
+      <li>✔ SLA-Backed Priority Support</li>
+    </ul>
+
+    <button class="sub-btn-outline">Contact Sales</button>
+  </div>
+
+</section>
+
+<!-- ENTERPRISE TRUST -->
+<section class="sub-enterprise">
+  <h2>Enterprise-Grade by Design</h2>
+  <div class="ent-grid">
+    <div>
+      <h4>Security & Compliance</h4>
+      <p>End-to-end encryption, audit logs, and compliance-ready infrastructure.</p>
+    </div>
+    <div>
+      <h4>Advanced Analytics</h4>
+      <p>Case trends, advocate performance, engagement insights, and reporting.</p>
+    </div>
+    <div>
+      <h4>Scalable Infrastructure</h4>
+      <p>Built to support courts, bar councils, and national-scale platforms.</p>
+    </div>
+    <div>
+      <h4>Human Support</h4>
+      <p>Dedicated onboarding, training, and priority resolution channels.</p>
+    </div>
+  </div>
+</section>
+
+
+</template>
+
 
 <template id="about">
 
@@ -1241,11 +1722,11 @@
 
       <div class="hero-badge">
         <i class="fas fa-balance-scale"></i>
-        Trusted Legal Platform Across India
+        Trusted e-Advocate Platform Across India
       </div>
 
       <h1 class="hero-title">
-        Simplifying Legal Access Through Technology
+        Simplifying Advocate Access Through Technology
       </h1>
 
       <p class="hero-subtitle" style="color:white;">
@@ -1375,7 +1856,7 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
   <!-- OUR STORY -->
 
 
-
+<!-- 
   <section class="section">
     <div class="container">
       <div class="about-grid fade-in">
@@ -1453,7 +1934,6 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 
 
 
-  <!-- CORE VALUES -->
   <section class="section">
     <div class="container">
 
@@ -1512,7 +1992,7 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- WHY CHOOSE US -->
   <section class="section">
@@ -1556,7 +2036,8 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 </section>
 
   <!-- LEADERSHIP -->
-  <section class="section">
+
+  <!-- <section class="section">
     <div class="container">
 
       <div class="section-header fade-in">
@@ -1718,13 +2199,483 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 
       </div>
     </div>
-
+ -->
 
 
 
 
 
 </template>
+
+<template id="advocatedashboard">
+
+<div class="advocate" style="display:flex;">
+<div class="sideadvo">
+ <aside class="sidebar">
+    <div class="logo">
+      <i class="fas fa-scale-balanced"></i>
+      E-Advocate
+    </div>
+
+    <div class="menu" >
+      <a class="active"><i class="fas fa-home"></i>Dashboard</a>
+      <a><i class="fas fa-briefcase"></i>My Cases</a>
+      <a><i class="fas fa-user-plus"></i>Client Requests</a>
+      <a><i class="fas fa-calendar-check"></i>Hearings</a>
+      <a><i class="fas fa-wallet"></i>Earnings</a>
+      <a><i class="fas fa-folder-open"></i>Documents</a>
+      <a><i class="fas fa-note-sticky"></i>Legal Notes</a>
+      <a><i class="fas fa-comments"></i>Messages</a>
+      <a><i class="fas fa-user-shield"></i>Profile & Verification</a>
+      <a><i class="fas fa-cog"></i>Settings</a>
+      <a><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+  </aside>
+</div>
+  <!-- MAIN -->
+  <div class="advomain" style="width:100%;"> 
+  <main class="main">
+
+    <!-- TOP -->
+    <div class="topbar">
+      <div>
+        <h2>Advocate Dashboard</h2>
+        <span class="status">Online</span>
+      </div>
+
+      <div class="profile">
+        <i class="fas fa-bell"></i>
+        <img src="https://i.pravatar.cc/150?img=8">
+        <div>
+          <strong>Adv. Rahul Sharma</strong><br>
+          <small>Criminal & Civil Law</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <small>Active Cases</small>
+        <h2 class="blu">22</h2>
+      </div>
+      <div class="stat">
+        <small>Completed</small>
+        <h2 class="green">61</h2>
+      </div>
+      <div class="stat">
+        <small>Client Requests</small>
+        <h2 class="orane">8</h2>
+      </div>
+      <div class="stat">
+        <small>Total Earnings</small>
+        <h2 class="red" style="color:rgb(83, 136, 4);">₹4,10,000</h2>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid">
+
+      <!-- GRAPH -->
+      <div class="box">
+        <h3>Earnings Analytics</h3>
+        <canvas id="earnChart" height="120"></canvas>
+      </div>
+
+      <!-- HEARINGS -->
+      <div class="box">
+        <h3>Upcoming Hearings</h3>
+        <div class="item"><span>State vs Ramesh</span><span>12 Jan</span></div>
+        <div class="item"><span>Property Dispute</span><span>18 Jan</span></div>
+        <div class="item"><span>Divorce Case</span><span>24 Jan</span></div>
+      </div>
+
+    </div>
+
+    <!-- GRID 2 -->
+    <div class="grid">
+
+      <div class="box">
+        <h3>Active Cases</h3>
+        <div class="item"><span>Criminal Appeal</span><span class="orange">In Progress</span></div>
+        <div class="item"><span>Civil Suit</span><span class="green">Hearing</span></div>
+      </div>
+
+      <div class="box">
+        <h3>Priority Tasks</h3>
+        <div class="item"><span>Upload evidence</span><span class="red">Urgent</span></div>
+        <div class="item"><span>Client follow-up</span><span class="orange">Pending</span></div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+</div>
+
+</template>
+
+
+<template id="clientdashboard">
+
+<div class="lc-dashboard">
+  <!-- SIDEBAR -->
+  <div class="lc-sidebar-container">
+    <aside class="lc-sidebar">
+      <section class="lc-user-profile">
+        <div ><img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8" class="lc-user-avatar">
+</div>
+
+        <h3>Manoj Kumar</h3>
+        <span>Client ID · 25496</span>
+      </section>
+
+      <section class="lc-premium-banner">
+        <strong>Go Premium</strong>
+        <p>Unlock unlimited consultations & priority matching</p>
+        <button>Upgrade Now</button>
+      </section>
+
+      <!-- <nav class="lc-nav">
+        <h4>Dashboard</h4>
+        <a onclick="showPage('lc-matches')" class="lc-active">My Matches</a>
+        <a onclick="showPage('lc-activity')">Activity</a>
+        <a onclick="showPage('lc-messages')">Messages</a>
+        <a onclick="showPage('lc-cases')">My Cases</a>
+        <a onclick="showPage('lc-cases')">Analytics</a>
+
+        <h4>Discover</h4>
+        <a onclick="showPage('lc-featured')">Top Lawyers</a>
+        <a onclick="showPage('lc-recommendations')">Recommendations</a>
+        <a onclick="showPage('lc-saved')">Saved Lawyers</a>
+
+        <h4>Account</h4>
+        <a onclick="showPage('lc-settings')">Settings</a>
+        <a onclick="showPage('lc-privacy')">Privacy</a>
+        <a onclick="showPage('lc-help')">Help</a>
+      </nav> -->
+
+<nav class="lc-nav">
+  <h4>Dashboard</h4>
+
+  <a onclick="showPage('lc-matches')" class="lc-active">
+    My Matches
+  </a>
+
+  <a onclick="showPage('lc-activity')">
+    Activity
+  </a>
+
+  <a onclick="showPage('lc-messages')">
+    Messages
+    <span class="lc-premium-badge">PRO</span>
+  </a>
+
+  <a onclick="showPage('lc-cases')">
+    My Cases
+  </a>
+
+  <a onclick="showPage('lc-analytics')" class="lc-premium">
+    Analytics
+    <span class="lc-premium-badge">PRO</span>
+  </a>
+
+  <h4>Discover</h4>
+
+  <a onclick="showPage('lc-featured')">
+    Top Lawyers
+  </a>
+
+  <a onclick="showPage('lc-recommendations')" class="lc-premium">
+    Recommendations
+    <span class="lc-premium-badge">PRO</span>
+  </a>
+
+  <a onclick="showPage('lc-saved')" class="lc-premium">
+    Saved Lawyers
+    <span class="lc-premium-badge">PRO</span>
+  </a>
+
+  <h4>Account</h4>
+
+  <a onclick="showPage('lc-settings')">
+    Settings
+  </a>
+
+  <a onclick="showPage('lc-privacy')">
+    Privacy
+  </a>
+
+  <a onclick="showPage('lc-help')">
+    Help
+  </a>
+</nav>
+
+
+
+    </aside>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="lc-main">
+    <!-- Matches Page -->
+    <div id="lc-matches" class="lc-page lc-active">
+      <header class="lc-header">
+        <div><h1>My Lawyer Matches</h1><p>Curated professionals ready to help you</p></div>
+        <div class="lc-header-actions">
+          <input type="search" placeholder="Search lawyers...">
+          <div class="lc-bell"><i class="fas fa-bell"></i></div>
+        </div>
+      </header>
+
+      <section class="lc-stats">
+        <div class="lc-stat"><h2>128</h2><span>Total Matches</span></div>
+        <div class="lc-stat"><h2>34</h2><span>New This Week</span></div>
+        <div class="lc-stat"><h2>12</h2><span>Unread Messages</span></div>
+        <div class="lc-stat"><h2>5</h2><span>Active Cases</span></div>
+      </section>
+
+      <section class="lc-filters">
+        <h3>Find Your Perfect Lawyer</h3>
+        <div class="lc-filter-group">
+          <select><option>Legal Issue</option><option>Divorce</option><option>Criminal</option><option>Business</option></select>
+          <select><option>Experience</option><option>1-5 Years</option><option>5-10 Years</option><option>10+ Years</option></select>
+          <select><option>Location</option><option>Near Me</option><option>Remote</option></select>
+        </div>
+        <button class="lc-btn">Apply Filters</button>
+      </section>
+
+      <section class="lc-cards">
+        <article class="lc-card">
+          <div class="lc-card-img"></div>
+          <span class="lc-badge lc-verified">Verified</span>
+          <h3>Samantha Reed</h3>
+          <p>Family Law Specialist · New York</p>
+          <p>Match Score: 94% · 8 years experience</p>
+          <div class="lc-actions">
+            <button>Send Message</button>
+            <button>Book Consultation</button>
+            <button>View Profile</button>
+          </div>
+        </article>
+        <!-- More cards similar -->
+      </section>
+    </div>
+
+    <!-- Other pages (Activity, Messages, Cases, etc.) follow similar structure -->
+    <!-- Full pages included in the complete version above your previous snippet -->
+
+    <!-- Mobile Bottom Nav -->
+    <footer class="lc-mobile-nav">
+      <span onclick="showPage('lc-matches')">Matches</span>
+      <span onclick="showPage('lc-activity')">Activity</span>
+      <span onclick="showPage('lc-messages')">Chat</span>
+      <span onclick="showPage('lc-cases')">Cases</span>
+    </footer>
+  </div>
+</div>
+
+</template>
+
+
+
+<template id="dashboard">
+
+<div class="admin-layout">
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+  <div class="menu">
+
+    <div class="item active">
+      <div class="title">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Members</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>All Members</a>
+        <a>Advocates</a>
+        <a>Clients</a>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-crown"></i>
+        <span>Premium Packages</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>Create Package</a>
+        <a>Active Packages</a>
+        <a>Expired Packages</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <i class="fa-solid fa-credit-card"></i>
+        <span>Package Payments</span>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Wallet</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>Transactions</a>
+        <a>Payouts</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <i class="fa-solid fa-heart"></i>
+        <span>Happy Stories</span>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-blog"></i>
+        <span>Blog System</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>All Blogs</a>
+        <a>Add Blog</a>
+        <a>Categories</a>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>Marketing</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>Email Campaigns</a>
+        <a>Push Notifications</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <i class="fa-solid fa-file"></i>
+        <span>Uploaded Files</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <i class="fa-solid fa-globe"></i>
+        <span>Website Setup</span>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>General</a>
+        <a>Security</a>
+        <a>Roles</a>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-user-tie"></i>
+        <span>Staffs</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>All Staffs</a>
+        <a>Add Staff</a>
+      </div>
+    </div>
+
+    <div class="item has-sub">
+      <div class="title">
+        <i class="fa-solid fa-microchip"></i>
+        <span>System</span>
+        <i class="fa-solid fa-chevron-right arrow"></i>
+      </div>
+      <div class="submenu">
+        <a>Logs</a>
+        <a>System Status</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <i class="fa-solid fa-puzzle-piece"></i>
+        <span>Addon Manager</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ================= MAIN ================= -->
+<div class="main-content">
+
+  <div class="topbar">
+    <button class="clear-cache"><i class="fas fa-trash"></i> Clear Cache</button>
+    <div class="admin-profile">
+      <i class="fas fa-bell"></i>
+      <img src="https://i.pravatar.cc/40">
+      <div><span>Admin</span></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="card blue"><p>Total Members</p><h2>124</h2></div>
+    <div class="card cyan"><p>Verified Advocates</p><h2>38</h2></div>
+    <div class="card pink"><p>Active Clients</p><h2>86</h2></div>
+    <div class="card orange"><p>Blocked Accounts</p><h2>3</h2></div>
+  </div>
+
+  <div class="analytics">
+    <div class="chart-box">
+      <h3>This Year Earnings</h3>
+      <canvas id="earnChart" height="120"></canvas>
+    </div>
+
+    <div class="earnings">
+      <div class="earn-card"><p>Total Earnings</p><h2>₹4,85,000</h2></div>
+      <div class="earn-card"><p>Last Month</p><h2>₹62,000</h2></div>
+      <div class="earn-card"><p>Last 6 Months</p><h2>₹2,90,000</h2></div>
+      <div class="earn-card"><p>Last 12 Months</p><h2>₹4,85,000</h2></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+</template>
+
+
+
 
 
 
@@ -1907,6 +2858,7 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
     made with ❤️ by Ilearn Nexus Technology Team
   </div>
 </footer>
+
 
 
 
