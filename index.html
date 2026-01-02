@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header class="navbar">
+
+   
+<div class="layout-container">
+
+  <!-- LEFT LOGO -->
+  <div class="side-logo left-side">
+    <a href="#home"> <img src="/eadvo.webp" alt="Left Logo"></a>
+  </div>
+
+  <!-- CENTER (3 NAV BARS STACKED) -->
+  <div class="center-block">
+
+
+    <!-- Sub Navbar -->
+    <div class="sub-navbar">
+            <marquee>Welcome to E-Advocate Services 💡</marquee>
+
+      <button id="font-minus">A-</button>
+      <button id="font-plus">A+</button>
+      <button id="theme-toggle">🌙</button>
+      <select id="language-switcher">
+        <option>EN</option><option>ES</option><option>FR</option><option>AR</option>
+      </select>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="main-nav">
+      <div class="menu-toggle">☰</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#" onclick="openbrowseprofiles()">Browse Files</a></li>
+        <li><a href="https://filing.ecourts.gov.in/pdedev/">File a Case</a></li>
+        <li><a href="https://services.ecourts.gov.in/ecourtindia_v6/">Case Status</a></li>
+        <li><a href="#blog">Blogs</a></li>
+        <li><a href="#about">About</a></li>
+            
+
+
+        <li><input type="search" id="site-search" class="searchbar"name="q" placeholder="Enter search terms..."></li>
+        <!--  -->
+
+
+        <li><a href="#" class="loginnav" onclick="openAuth('login')">Login</a></li>
+        <li><a href="#" class="registernav" onclick="openAuth('register')">Register</a></li>
+
+
+
+
+
+      </ul>
+    </nav>
+
+    <!-- Projects Navbar -->
+    <div class="projects-navbar">
+      <a href="#"><img src="/edverse.webp" class="navlogo"style="width:20px;height:20px">Tatito Edverse ↗</a>
+      <a href="#"><img src="/carrer.webp" class="navlogo"style="width:20px;height:20px">Tatito Carrer Hub </a>
+      <a href="#"><img src="/nexus.webp" class="navlogo"style="width:20px;height:20px">Tatito Nexus ↗</a>
+      <a href="#"><img src="/civic.webp" class="navlogo"style="width:20px;height:20px">Tatito Civic One ↗</a>
+      <a href="#"><img src="/health.webp" class="navlogo"style="width:20px;height:20px">Tatito Health+ ↗</a>
+      <a href="#"><img src="/fashion.webp" class="navlogo"style="width:20px;height:20px">Tatito Fashions ↗</a>  
+    </div>
+
+  </div>
+
+  <!-- RIGHT LOGO -->
+  <div class="side-logo right-side">
+    <img src="/civic.webp" alt="Right Logo">
+  </div>
+
+</div>
+
+
+</header>
+
+
+<!-- main spa logic container -->
+
+<main id="app"></main>
+
+<!-- auth login registerr popup  -->
+
+<div class="auth-overlay" id="authPopup">
+
+  <div class="auth-box">
+
+    <div class="auth-header">
+
+      <div class="brand">
+    <h1>⚖️ E-Advocate</h1>
+    <span>Secure Legal Access Portal</span>
+  </div>
+
+      <span class="close-auth" onclick="closeAuth()">×</span>
+    </div>
+
+    <div class="auth-tabs">
+      <button id="loginTab" class="active" onclick="switchTab('login')">Login</button>
+      <button id="registerTab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN -->
+    <form id="loginForm" class="auth-form active">
+
+
+         <div class="form-group">
+      <label>Role</label>
+      <select id="loginRole">
+        <option>Client</option>
+        <option>Advocate</option>
+        <option>Admin</option>
+      </select>
+    </div>
+
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="form-options">
+        <label class="checkbox">
+          <input type="checkbox"> Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <i class="fas fa-right-to-bracket"></i> Login
+      </button>
+    </form>
+
+    <!-- REGISTER -->
+    <div id="registerForm" class="auth-form">
+      <button class="reg-client" onclick="openClientForm()">
+        <i class="fas fa-user-plus"></i> Register as a Client
+      </button>
+
+      <button class="reg-client" onclick="openAdvocateForm()">
+        <i class="fas fa-user-tie"></i> Register as an Advocate
+      </button>
+
+      <div class="conform">
+        Already have an account?
+        <a href="#" onclick="switchTab('login')">Click here to login</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- register as client and registerr as a advocate  -->
+
+<div id="clientPopup" class="popup">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closeClientForm()">×</span>
+    
+    <h1>Client Registration</h1>
+
+    <div class="steps">
+      <button class="step active">Personal Details</button>
+      <button class="step">Verification</button>
+      <button class="step">Address & Location</button>
+      <button class="step">Legal Help Required</button>
+      <button class="step">Declarations</button>
+    </div>
+
+    <form id="clientForm">
+
+      <!-- STEP 1 -->
+      <section class="client-step active">
+        <div class="grid">
+          <div><label>First Name *</label><input required></div>
+          <div><label>Last Name *</label><input required></div>
+
+          <div>
+            <label>Gender *</label>
+            <select required>
+              <option value="">Select your gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+
+          <div><label>Date of Birth *</label><input type="date" required></div>
+          <div><label>Mobile Number *</label><input required></div>
+          <div><label>Email *</label><input type="email" required></div>
+
+          <div>
+            <label>Document / Proof Type *</label>
+            <select required>
+              <option value="">Select document type</option>
+              <option>Aadhaar</option>
+              <option>PAN</option>
+              <option>Passport</option>
+            </select>
+          </div>
+
+          <div><label>Profile Picture *</label><input type="file" required></div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="client-step">
+        <p class="center">Enter OTP sent to your Email & Mobile</p>
+        <input placeholder="Email OTP" required>
+        <br><br>
+        <input placeholder="Phone OTP" required>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="client-step">
+        <div class="grid">
+          <div><label>Country *</label><input required></div>
+          <div><label>State *</label><input required></div>
+          <div><label>City *</label><input required></div>
+          <div><label>Office Address *</label><input required></div>
+          <div class="full"><label>Permanent Address *</label><textarea required></textarea></div>
+          <div><label>Pin Code *</label><input required></div>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="client-step">
+        <div class="grid">
+          <div><label>Category *</label><select required><option>Criminal</option><option>Civil</option></select></div>
+          <div><label>Specialization *</label><input required></div>
+          <div><label>Sub Department *</label><input required></div>
+          <div><label>Consultation Mode *</label><select><option>Online</option><option>Offline</option></select></div>
+          <div><label>Advocate Type *</label><select><option>Senior</option><option>Junior</option></select></div>
+          <div><label>Languages *</label><input required></div>
+          <div class="full"><label>Brief Legal Issue *</label><textarea required></textarea></div>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="client-step">
+        <label><input type="checkbox" required> Information is true</label><br>
+        <label><input type="checkbox" required> Agree to BCI norms</label><br>
+        <label><input type="checkbox" required> Consent to share profile</label><br><br>
+
+        <label>Signature *</label>
+        <input type="file" required><br><br>
+
+        <label>Date *</label>
+        <input type="date" required><br><br>
+
+        <label><input type="checkbox" required> Accept Terms & Privacy Policy</label>
+      </section>
+
+      <!-- buttons -->
+      <div class="buttons">
+        <button type="button" id="prevBtn">Back</button>
+        <button type="button" id="nextBtn">Next</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- ================= ADVOCATE POPUP ================= -->
+<div id="advocatePopup" class="popup">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closeAdvocateForm()">×</span>
+    
+
+    <div class="popup-overlay" id="popup">
+  <div class="popup-bx">
+
+    <div class="header">
+      <h1>Advocate Registration</h1>
+      <span class="close-btn" onclick="closeAdvocateForm()">×</span>
+    </div>
+
+    <div class="steps">
+      <button class="step active">Personal Details</button>
+      <button class="step">Verification</button>
+      <button class="step">Educational Details</button>
+      <button class="step">Practice Information</button>
+      <button class="step">Location Details</button>
+      <button class="step">Career Info</button>
+      <button class="step">Availability</button>
+      <button class="step">Declarations</button>
+    </div>
+
+    <form id="advocateForm">
+
+      <!-- STEP 1 -->
+      <section class="form-step active">
+        <div class="grid">
+          <div><label>First Name *</label><input required></div>
+          <div><label>Last Name *</label><input required></div>
+          <div><label>Gender *</label><select required><option>Select</option><option>Male</option><option>Female</option></select></div>
+          <div><label>Date of Birth *</label><input type="date" required></div>
+          <div><label>Mobile Number *</label><input required></div>
+          <div><label>Email *</label><input type="email" required></div>
+          <div><label>Document / Proof *</label><select required><option>Select</option><option>Aadhaar</option><option>PAN</option></select></div>
+          <div><label>Profile Picture *</label><input type="file" required></div>
+        </div>
+        <div class="actions">
+          <span></span>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="form-step">
+        <div class="grid">
+          <div class="full"><label>Email OTP *</label><input required></div>
+          <div class="full"><label>Phone OTP *</label><input required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Verify & Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="form-step">
+        <div class="grid">
+          <div><label>Graduate Degree *</label><input required></div>
+          <div><label>Degree Course *</label><input required></div>
+          <div><label>State *</label><input required></div>
+          <div><label>University *</label><input required></div>
+          <div><label>College *</label><input required></div>
+          <div><label>Graduation Year *</label><input required></div>
+          <div><label>Enrollment No *</label><input required></div>
+          <div><label>Certificate *</label><input type="file" required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="form-step">
+        <div class="grid">
+          <div><label>Court of Practice *</label><input required></div>
+          <div><label>Specialization *</label><input required></div>
+          <div><label>Sub Department *</label><input required></div>
+          <div><label>Experience *</label><input required></div>
+          <div><label>Bar Association</label><input></div>
+          <div><label>License *</label><input type="file" required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="form-step">
+        <div class="grid">
+          <div><label>Country *</label><input required></div>
+          <div><label>State *</label><input required></div>
+          <div><label>City *</label><input required></div>
+          <div><label>Office Address *</label><input required></div>
+          <div class="full"><label>Permanent Address *</label><textarea required></textarea></div>
+          <div><label>Pincode *</label><input required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 6 -->
+      <section class="form-step">
+        <div class="grid">
+          <div><label>Current Firm</label><input></div>
+          <div><label>Position</label><input></div>
+          <div><label>Work Type *</label><input required></div>
+          <div><label>Languages *</label><input required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 7 -->
+      <section class="form-step">
+        <div class="checks">
+          <label><input type="checkbox" checked> Phone</label>
+          <label><input type="checkbox" checked> Video</label>
+          <label><input type="checkbox" checked> In-person</label>
+        </div>
+        <div class="days">
+          <label><input type="checkbox" checked> Mon</label>
+          <label><input type="checkbox" checked> Tue</label>
+          <label><input type="checkbox" checked> Wed</label>
+          <label><input type="checkbox" checked> Thu</label>
+          <label><input type="checkbox" checked> Fri</label>
+          <label><input type="checkbox" checked> Sat</label>
+          <label><input type="checkbox" checked> Sun</label>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="button" class="btn primary next">Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 8 -->
+      <section class="form-step">
+        <div class="checks">
+          <label><input type="checkbox" required> All information is true</label>
+          <label><input type="checkbox" required> Agree to BCI norms</label>
+          <label><input type="checkbox" required> Accept Privacy Policy</label>
+        </div>
+        <div class="grid">
+          <div><label>Signature *</label><input type="file" required></div>
+          <div><label>Date *</label><input type="date" required></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn back">Back</button>
+          <button type="submit" class="btn primary">Submit</button>
+        </div>
+      </section>
+
+    </form>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+
+
+<!-- chatbot helper -->
+
+      <!-- Chat Widget -->
+         <div id="chatWidget" class="chat-widget">
+                <div class="chat-header">
+                <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <span>Legal Assistant</span>
+            </div>
+                <button class="chat-toggle" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+           </div>
+                <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm your legal assistant. How can I help you today?
+                </div>
+            </div>
+        </div>
+            <div class="chat-input">
+            <input type="text" placeholder="Type your message..." id="chatInput">
+            <button onclick="sendChatMessage()">
+            <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+        <!-- Chat Toggle Button -->
+        <div id="chatToggle" class="chat-toggle-btn" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+        <span class="notification-dot"></span>
+       </div>
+
+
+
+
+<!-- browse profiles code  -->
+
+
+
+<div id="Browseprofiles" class="popup">
+  <div class="popup-box">
+    
+    <div class="popup-header">
+      <h2>Filter Advocate Profiles</h2>
+      <span class="close-btn" onclick="closebrowseprofiles()">×</span>
+    </div>
+
+    <form id="filterForm">
+
+      <div class="filter-grid">
+
+        <!-- LANGUAGE -->
+        <select>
+          <option value="">Select Language</option>
+          <option>English</option><option>Hindi</option><option>Telugu</option>
+          <option>Assamese</option><option>Awadhi</option><option>Bagheli</option>
+          <option>Banjara</option><option>Bhojpuri</option><option>Bodo</option>
+          <option>Bundeli</option><option>Chhattisgarhi</option><option>Coorgi</option>
+          <option>Dakhini</option><option>Dogri</option><option>Garhwali</option>
+          <option>Gujarati</option><option>Haryanvi</option><option>Kannada</option>
+          <option>Kashmiri</option><option>Konkani</option><option>Malayalam</option>
+          <option>Manipuri</option><option>Marathi</option><option>Punjabi</option>
+          <option>Rajasthani</option><option>Sanskrit</option><option>Tamil</option>
+          <option>Tulu</option><option>Urdu</option>
+        </select>
+
+        <!-- DEPARTMENT -->
+        <select id="department">
+          <option value="">Department</option>
+          <option value="criminal">Criminal Law</option>
+          <option value="family">Family Law</option>
+          <option value="corporate">Corporate / Company Law</option>
+          <option value="constitutional">Constitutional Law</option>
+          <option value="ip">Intellectual Property Law</option>
+          <option value="cyber">Cyber Law / IT Law</option>
+        </select>
+
+        <!-- SUB-DEPARTMENT -->
+        <select id="subDepartment">
+          <option value="">Sub-Department</option>
+        </select>
+
+        <!-- EXPERIENCE -->
+        <select>
+          <option value="">Experience</option>
+          <option>0–5 Years</option>
+          <option>5–10 Years</option>
+          <option>10+ Years</option>
+        </select>
+
+        <!-- STATE -->
+        <select id="state">
+          <option value="">Select State</option>
+          <option value="telangana">Telangana</option>
+          <option value="andhra">Andhra Pradesh</option>
+          <option value="karnataka">Karnataka</option>
+          <option value="tamilnadu">Tamil Nadu</option>
+          <option value="maharashtra">Maharashtra</option>
+        </select>
+
+        <!-- DISTRICT -->
+        <select id="district">
+          <option value="">Select District</option>
+        </select>
+
+        <!-- CITY -->
+        <select id="city">
+          <option value="">Select City</option>
+        </select>
+
+        <!-- MODE -->
+        <select>
+          <option value="">Consultation Mode</option>
+          <option>Online</option>
+          <option>Offline</option>
+          <option>Hybrid</option>
+        </select>
+
+      </div>
+
+      <div class="popup-actions">
+        <button type="reset" class="btn-outline">Reset</button>
+        <button type="submit" class="btn-primary">Apply Filters</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+
+
+<!-- main first page home -->
+<template id="home">
+
+<section class="hero">
+
+
+
+
+    <div class="hero-content">
+
+
+            <div class="org-logo">
+    <img src="/image.png" alt="Your Organization Logo" >
+    
+  </div>
+
+
+
+
+      <h1 class="hero-title">
+        Your Trusted
+        Legal Partner
+      </h1>
+
+      <p class="hero-subtitle">
+        Expert legal consultation and advocacy services delivered digitally. Get professional legal help from certified advocates, anytime, anywhere.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">
+          Book Consultation
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Watch Demo
+        </a>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-number">99%</span>
+          <span class="stat-label">Success Rate</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Availability</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Expert Lawyers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Image -->
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop&crop=faces,center" alt="Professional legal consultation">
+
+      <div class="notification-badge">
+        Case Won<br>
+        <strong>Fastest Resolution in 48hrs</strong>
+      </div>
+    </div>
+
+
+</section>
+
+
+<!-- second page -->
+
+
+<section class="legal-services">
+  <h2 class="section-title">Comprehensive Legal Solutions</h2>
+  <p class="section-subtitle">
+    From consultation to representation, we provide complete legal services tailored to your specific needs.
+  </p>
+
+  <div class="service-grid">
+
+    <!-- 1 -->
+    <div class="service-card">
+      <div class="icon" style="background:#3b82f6;">
+        ⚖️
+      </div>
+      <h3>Legal Consultation</h3>
+      <p>Get expert legal advice from experienced advocates on any legal matter.</p>
+    </div>
+
+    <!-- 2 - highlighted center -->
+    <div class="service-card">
+      <div class="icon" style="background:#8b5cf6;">
+        📄
+      </div>
+      <h3>Document Review</h3>
+      <p>Professional review and drafting of legal documents and contracts.</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="service-card">
+      <div class="icon" style="background:#22c55e;">
+        👥
+      </div>
+      <h3>Court Representation</h3>
+      <p>Skilled representation in courts with a proven track record of success.</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="service-card">
+      <div class="icon" style="background:#f97316;">
+        🛡️
+      </div>
+      <h3>Legal Protection</h3>
+      <p>Comprehensive legal protection plans for individuals and businesses.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="service-card">
+      <div class="icon" style="background:#ef4444;">
+        ⏱️
+      </div>
+      <h3>24/7 Support</h3>
+      <p>Round-the-clock legal support for urgent matters and emergencies.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="service-card">
+      <div class="icon" style="background:#6366f1;">
+        💼
+      </div>
+      <h3>Corporate Law</h3>
+      <p>Complete corporate legal services from formation to compliance.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="eadvocate-section">
+    <h2 class="section-title">e-Advocate Services</h2>
+    <p class="section-sub">Quick access to legal filing & case tracking</p>
+    <div class="services-outer">
+      <!-- Row 1 -->
+      <div class="service-row visible">
+        <div class="service-content">
+          <div class="content-glass">
+            <h3>File Case</h3>
+            <div class="service-icon">
+              <img src="https://img.icons8.com/ios-filled/100/ffffff/documents.png" alt="File Case">
+            </div>
+            <p>
+              File new cases, petitions, appeals, complaints, FIR-related submissions and legal documents
+              directly through the official government e-filing portals. Start your case filing digitally without visiting the court.
+            </p>
+            <a href="https://filing.ecourts.gov.in/pdedev/" class="card-btn" target="_blank">Proceed</a>
+          </div>
+        </div>
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop" alt="File Case" class="active">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop" alt="File Case 2">
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <!-- Row 2: Case Status - Image LEFT, Content RIGHT -->
+        <div class="service-row visible reverse">  <!-- ADD 'reverse' HERE -->
+        <div class="service-content">
+            <div class="content-glass">
+            <h3>Case Status</h3>
+            <div class="service-icon">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/search--v1.png" alt="Case Status">
+            </div>
+            <p>
+                View current case status, next hearing dates, court orders, judgments, and related updates
+                directly from official portals. Check live status using case number, party name, advocate name, or FIR number.
+            </p>
+            <a href="https://services.ecourts.gov.in/ecourtindia_v6/" class="card-btn" target="_blank">Track Now</a>
+            </div>
+        </div>
+        <div class="service-image">
+                      <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop" alt="Case Status2" class="active">
+
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop" alt="Case status " >
+        </div>
+        </div>
+    </div>
+  </section>
+
+<!-- filterr advocates -->
+
+
+<section class="advocate-section">
+  <h2>Find Expert Advocates</h2>
+  <p class="advocate-subtitle">Search, filter, and connect with top-rated legal professionals.</p>
+
+  <div class="blogsection">   
+
+  <!-- Filters -->
+  <div class="filters">
+    <select id="filter-location">
+      <option value="">Location</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Bangalore">Bangalore</option>
+    </select>
+
+    <select id="filter-experience">
+      <option value="">Experience</option>
+      <option value="5">5+ Years</option>
+      <option value="10">10+ Years</option>
+      <option value="15">15+ Years</option>
+    </select>
+
+    <select id="filter-specialization">
+      <option value="">Specialization</option>
+      <option value="Corporate Law">Corporate Law</option>
+      <option value="Criminal Defense">Criminal Defense</option>
+      <option value="Family Law">Family Law</option>
+    </select>
+
+    <button onclick="applyFilters()">Apply Filters</button>
+  </div>
+  
+  <!-- Advocates List -->
+  <div id="advocates-container" class="advocates-grid"></div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- how it works -->
+
+<section class="howitworks">
+  <div class="hiw-wrap">
+
+    <span class="hiw-badge">How It Works</span>
+    <h2>Simple & Efficient Process</h2>
+    <p class="hiw-desc">
+      Get started with our streamlined legal services in just four easy steps.
+    </p>
+
+    <div class="hiw-row">
+
+      <!-- Step 1 -->
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          👤
+          <span class="hiw-num">1</span>
+        </div>
+        <h4>Create Account</h4>
+        <p>Sign up in minutes and complete your profile with your legal requirements.</p>
+      </div>
+
+      <span class="hiw-line"></span>
+
+      <!-- Step 2 -->
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          💬
+          <span class="hiw-num">2</span>
+        </div>
+        <h4>Consult Expert</h4>
+        <p>Get matched with the best advocate for your case and schedule a consultation.</p>
+      </div>
+
+      <span class="hiw-line"></span>
+
+      <!-- Step 3 -->
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          📄
+          <span class="hiw-num">3</span>
+        </div>
+        <h4>Review & Approve</h4>
+        <p>Review legal strategies, documents, and approve the plan of action.</p>
+      </div>
+
+      <span class="hiw-line"></span>
+
+      <!-- Step 4 -->
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          ✔
+          <span class="hiw-num">4</span>
+        </div>
+        <h4>Track Progress</h4>
+        <p>Monitor your case progress in real-time with regular updates.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- practice page -->
+
+
+
+<section class="practice-areas">
+  <div class="pa-container">
+
+    <span class="pa-badge">Practice Areas</span>
+    <h2>Expert Legal Services Across All Domains</h2>
+    <p class="pa-subtitle">
+      Our experienced advocates specialize in various legal fields to serve your needs.
+    </p>
+
+    <div class="pa-grid">
+
+      <div class="pa-card">
+        <div class="pa-icon">⚖️</div>
+        <h4>Civil Law</h4>
+        <span class="pa-cases">2,500+ Cases</span>
+        <p>Property disputes, contracts, and civil litigation.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">🏢</div>
+        <h4>Corporate Law</h4>
+        <span class="pa-cases">1,800+ Cases</span>
+        <p>Business formation, mergers, acquisitions.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">👨‍👩‍👧</div>
+        <h4>Family Law</h4>
+        <span class="pa-cases">3,200+ Cases</span>
+        <p>Divorce, custody, adoption, and family matters.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">🏠</div>
+        <h4>Real Estate</h4>
+        <span class="pa-cases">2,100+ Cases</span>
+        <p>Property transactions, leases, and disputes.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">💼</div>
+        <h4>Employment Law</h4>
+        <span class="pa-cases">1,600+ Cases</span>
+        <p>Workplace rights, contracts, and disputes.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">❤️</div>
+        <h4>Personal Injury</h4>
+        <span class="pa-cases">1,900+ Cases</span>
+        <p>Accident claims and compensation cases.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">🛡️</div>
+        <h4>Criminal Defense</h4>
+        <span class="pa-cases">2,400+ Cases</span>
+        <p>Criminal cases and legal defense services.</p>
+      </div>
+
+      <div class="pa-card">
+        <div class="pa-icon">✈️</div>
+        <h4>Immigration Law</h4>
+        <span class="pa-cases">1,400+ Cases</span>
+        <p>Visa, citizenship, and immigration matters.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- blogs page -->
+
+
+<section class="blog-section" id="blog">
+    <h2 class="section-title">Legal Insights & Blog</h2>
+    <p class="section-sub">Updated regularly | Legal awareness, filing guidance, case tracking help</p>
+
+  <div class="blogsection">   
+  
+  <div class="blog-grid" id="blogContainer"></div>
+  </div>  
+</section>
+
+<!-- testmonials  -->
+
+<section class="testimonials">
+  <div class="tm-container">
+
+    <span class="tm-pill">Testimonials</span>
+    <h2>What Our Clients Say</h2>
+    <p class="tm-subtitle">
+      Don't just take our word for it. Here's what our satisfied clients have to say.
+    </p>
+
+    <div class="tm-grid">
+
+      <!-- Card 1 -->
+      <div class="tm-card">
+        <div class="tm-stars">★★★★★</div>
+        <div class="tm-quote">“</div>
+        <p class="tm-text">
+          The legal team at eLegal helped me navigate a complex business dispute with
+          professionalism and expertise. Their digital platform made everything so convenient.
+        </p>
+
+        <div class="tm-user">
+          <img src="/cl2.jpg" alt="krishna Manoher">
+          <div>
+            <h4>Krishna Manoher</h4>
+            <span>Business Owner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tm-card">
+        <div class="tm-stars">★★★★★</div>
+        <div class="tm-quote">“</div>
+        <p class="tm-text">
+          Outstanding service! They handled my property case with exceptional care and kept me
+          informed every step of the way. Highly recommended for anyone needing legal support.
+        </p>
+
+        <div class="tm-user">
+          <img src="/cl1.jpg" alt="latha">
+          <div>
+            <h4>Latha Reddy</h4>
+            <span>House Wife</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tm-card">
+        <div class="tm-stars">★★★★★</div>
+        <div class="tm-quote">“</div>
+        <p class="tm-text">
+          Professional, efficient, and results-driven. The e-advocate services saved me time and
+          money while delivering excellent legal counsel. Worth every penny!
+        </p>
+
+        <div class="tm-user">
+          <img src="/cl2.jpg" alt="Robert Martinez">
+          <div>
+            <h4>pavan Kumar</h4>
+            <span>Entrepreneur</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+
+<section class="faq-section">
+
+  <span class="faq-badge">FAQ</span>
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <p class="faq-subtitle">
+    Find answers to common questions about our e-advocate services.
+  </p>
+
+  <div class="faq-container">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How does the online consultation work?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Online consultation allows you to connect with verified advocates
+          via chat, call, or video. You book a slot, describe your issue,
+          and receive expert legal guidance remotely.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What are your service fees?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Fees depend on the legal matter and advocate expertise.
+          All charges are transparent and shown before confirmation.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How quickly can I get legal assistance?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Most users are connected with an advocate within minutes.
+          Urgent cases are prioritized for faster assistance.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Are your advocates licensed and certified?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. All advocates on our platform are verified,
+          licensed, and registered with official Bar Councils.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Can I track my case progress online?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          You can track case status, documents, hearings,
+          and updates directly from your dashboard.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What if I need to change my advocate?
+        <span>⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          You can request a change through your dashboard.
+          Our support team will help you find a suitable replacement.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ready to connect -->
+
+<section class="contact-section">
+
+  <!-- Header -->
+  <span class="contact-badge">Get in Touch</span>
+  <h2 class="contact-title">Ready to Get Started?</h2>
+  <p class="contact-sub">
+    Have questions? Our team is here to help. Contact us for a free consultation.
+  </p>
+
+  <!-- Contact Cards -->
+  <div class="contact-cards">
+
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h4>Call Us</h4>
+      <p class="bold">+91 7093704706</p>
+      <span>Mon–Fri 9am–6pm</span>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <h4>Email Us</h4>
+      <p class="bold">tatitoprojects@gmail.com</p>
+      <span>We reply within 24hrs</span>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h4>Visit Us</h4>
+      <p class="bold">Tirupati, Andhra Pradesh 517501, India</p>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- Contact Form -->
+  <div class="contact-form-box">
+    <form id="contactForm">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="+1 (555) 000-0000" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Legal Matter Type</label>
+        <input type="text" placeholder="e.g., Family Law, Corporate, Criminal Defense">
+      </div>
+
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Please describe your legal matter in detail..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Send Message <span>➤</span>
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+</template>
+
+<template id="about">
+
+
+
+
+<!-- ABOUT PAGE -->
+  
+  
+
+
+
+
+  <!-- HERO -->
+  <section class="about-hero">
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <i class="fas fa-balance-scale"></i>
+        Trusted Legal Platform Across India
+      </div>
+
+      <h1 class="hero-title">
+        Simplifying Legal Access Through Technology
+      </h1>
+
+      <p class="hero-subtitle" style="color:white;">
+        E-Advocate Services is a modern legal technology platform designed to
+        connect clients with verified advocates across India. We empower
+        individuals, businesses, and professionals with transparent, secure,
+        and efficient access to legal expertise—anytime, anywhere.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-itemabout">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Years of Legal-Tech Experience</span>
+        </div>
+
+        <div class="stat-itemabout">
+          <span class="stat-number">1,000+</span>
+          <span class="stat-label">Registered Advocates</span>
+        </div>
+
+        <div class="stat-itemabout">
+          <span class="stat-number">5,000+</span>
+          <span class="stat-label">Clients Assisted</span>
+        </div>
+
+        <div class="stat-itemabout">
+          <span class="stat-number">96%</span>
+          <span class="stat-label">Client Trust & Satisfaction</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <div class="profile-card">
+    <!-- Top section -->
+    <div class="profile-top">
+        <!-- Left: Image -->
+        <div class="profile-image">
+            <img src="manojsir.png" alt="Profile Image">
+        </div>
+
+        <!-- Right: Details -->
+        <div class="profile-details">
+            <h2>Manoj kumar vanam</h2>
+            <p class="designation">Founder & CEO</p>
+
+            <ul class="profile-meta">
+                <li>📍 Bangalore, India</li>
+                <li>💼 Tech Entrepreneur</li>
+                <li>✉️ john@example.com</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom: Explanation -->
+    <div class="profile-description">
+        <p>
+<div class="profile-card-mini">
+          <h1>Founder & CEO | Manoj Kumar Vanam. </h1>
+             At Tatito Projects & Mano Group Of Solutins we lead the way in innovation, transforming 
+ambitious ideas into intuitive and impactful digital experiences. Our expertise spans diverse 
+industries, demonstrated through our work in education, environmental sustainability, finance, and 
+philanthropy. We deliver tailored solutions that priorities excellence and drive real-world impact. 
+Our team comprises informed authorities in the tech world with over five years of strong experience 
+in software product development. We excel in addressing the unique challenges and opportunities 
+across various sectors, ensuring that we provide cutting-edge solutions that meet your needs
+   </div>    
+
+   <div class="profile-card-mini">
+
+<h1>Employees </h1>
+We are having Well Experienced and loyal 
+Employees in all Domains, Marketing People, Tele
+callers, Digital Marketers, Web Designers, Teaching 
+Faculty, IT Engineer, Real estate Engineers, Site 
+Engineers, Marketers. we lead the way in 
+innovation, transforming ambitious ideas into 
+intuitive and impactful digital experiences. Our 
+expertise spans diverse industries, demonstrated through our work in education, environmental sustainability, finance, and 
+philanthropy. We deliver tailored solutions that priorities excellence and drive real-world impact. 
+   </div>
+<div class="profile-card-mini">
+
+<h1>Why Choose Us</h1>
+In-Depth Understanding: We live and breathe blockchain, ensuring that you receive cutting-edge 
+solutions that drive real-world impact. 
+Tailored Solutions: We craft bespoke blockchain-based services that align with your objectives and 
+foster sustainable growth. 
+Reliability & Transparency: Trust is vital for successful partnerships. We priorities integrity, 
+transparency, and collaboration, providing well-informed decisions and regular updates
+</div>
+<div class="profile-card-mini">
+
+<h1>Experience</h1>
+Our Project Is on Tele-calling, International Project From Texas. Later on We moved to Real Estate 
+Industry, in Real Estate We gone through the marketing and later on Engineering then on Building the 
+Houses and marketing then on Promotions in all Social Media then on Digital Marketing, In digital 
+marketing we gain more satisfied customers on digital marketing promotions in all social media, later 
+on education fields that is consultancy and institution we ha e celebrated with the few collages and it 
+companies. At Tatito Projects & Mano Group of Solutions we are committed to pushing 
+the boundaries of IT & Non IT Projects, Marketing & Including app and game development. With our 
+forward thinking approach and cutting-edge technology, we create exceptional digital experiences 
+that captivate and engage users across various platforms. 
+</div>
+<div class="profile-card-mini">
+
+<h1>Our Satisfied Customers</h1>
+Here are some Satisfied Customers, We have Provided Our Services In all Fields,  
+
+<img src="clients.jpeg" alt="clients">
+
+</div>
+</p>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+  <!-- OUR STORY -->
+
+
+
+  <section class="section">
+    <div class="container">
+      <div class="about-grid fade-in">
+
+        <div class="about-image">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
+            alt="Tatito Team"
+          />
+        </div>
+
+        <div class="about-content">
+          <h3>Our Story</h3>
+
+          <p>
+            Founded by a team of passionate tech enthusiasts, Tatito Projects
+            began with a simple yet powerful vision: to transform ambitious ideas
+            into intuitive and impactful digital experiences.
+          </p>
+
+          <p>
+    
+           E-Advocate Services was established with a clear vision — to simplify
+          access to legal assistance through technology. We identified a critical
+          gap between individuals seeking legal help and verified advocates
+          offering professional expertise, and set out to bridge that gap
+          securely and transparently.
+
+           Today, we operate across multiple domains — from real estate and
+            education to finance and philanthropy — delivering tailored solutions
+            that prioritize excellence and drive real-world impact.
+          </p>
+
+          <div class="highlight-box">
+            <strong>Our Journey:</strong>
+            Tele-calling → Real Estate → Engineering → Digital Marketing →
+            Education → Software Development → Game Development → AI Solutions
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <section class="section vision-mission">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Vision & Mission</h2>
+                <p class="section-subtitle">Our guiding principles that drive every decision and innovation</p>
+            </div>
+            
+            <div class="vm-grid fade-in">
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="vm-title">  Our Vision</h3>
+                    <p>To become the preeminent leader in the app and game development industry, renowned for our cutting-edge solutions, exceptional customer service, and a driving passion for creating transformative digital experiences that inspire and enable our clients to achieve their goals.</p>
+                </div>
+                
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="vm-title">Our Mission</h3>
+                    <p>At the heart of Tatito Projects lies an unwavering commitment to empowering our clients with innovative digital solutions that push the boundaries of what's possible. We strive to be the trusted partner that helps businesses and individuals unlock their full potential through the power of technology.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+  <!-- CORE VALUES -->
+  <section class="section">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-subtitle">
+          The principles that define who we are and how we work
+        </p>
+      </div>
+
+      <div class="values-grid fade-in">
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Innovation</h3>
+          <p>
+            We constantly push boundaries and explore new technologies to
+            deliver cutting-edge solutions.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Collaboration</h3>
+          <p>
+            We believe in the power of teamwork and partnership to achieve
+            extraordinary results.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Integrity</h3>
+          <p>
+            Trust, transparency, and ethical practices are at the core of
+            everything we do.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Excellence</h3>
+          <p>
+            We are committed to delivering the highest quality in every project
+            we undertake.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section">
+  <div class="container">
+
+    <div class="section-header fade-in">
+      <h2 class="section-title">Why Choose E-Advocate Services?</h2>
+      <p class="section-subtitle">
+        What makes us a trusted legal-tech platform
+      </p>
+    </div>
+
+    <div class="about-grid fade-in">
+
+      <div class="about-content">
+        <h3>Expertise That Builds Trust</h3>
+        <p>
+          E-Advocate Services brings together experienced legal professionals and
+          modern technology to deliver dependable legal solutions. Our platform
+          is designed to simplify complex legal processes while maintaining the
+          highest standards of confidentiality and professionalism.
+        </p>
+
+        <ul>
+          <li><strong>Verified Advocates:</strong> Trusted and qualified legal professionals</li>
+          <li><strong>Transparent Process:</strong> Clear communication and case tracking</li>
+          <li><strong>Secure Platform:</strong> Data privacy and protected interactions</li>
+          <li><strong>End-to-End Support:</strong> Consultation → Case Handling → Resolution</li>
+        </ul>
+      </div>
+
+      <div class="about-image">
+        <img
+          src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop"
+          alt="Why Choose E-Advocate Services"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- LEADERSHIP -->
+  <section class="section">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <h2 class="section-title">Meet Our Team</h2>
+        <p class="section-subtitle">
+          The visionaries driving innovation at Tatito Projects
+        </p>
+      </div>
+
+      <div class="team-grid fade-in">
+
+  <div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Manoj Kumar Vanam">
+    </div>
+    <div class="person-info">
+        <h3>Manoj Kumar Vanam</h3>
+        <p class="role">Founder & CEO</p>
+        <small>Tatito Project's</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Visionary founder and CEO leading Tatito Projects with a focus on
+            innovation, scalable platforms, and long-term growth strategy.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Pavan Kumar Dasari">
+    </div>
+    <div class="person-info">
+        <h3>Pavan Kumar Dasari</h3>
+        <p class="role">Partner</p>
+        <small>Web • APIs • Architecture</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Experienced manager with strong expertise in web development,
+            scalable APIs, and system architecture.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Chiranjeevi">
+    </div>
+    <div class="person-info">
+        <h3>Chiranjeevi</h3>
+        <p class="role">Full Stack Developer</p>
+        <small>Web • APIs</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Full stack developer focused on building efficient web applications
+            and robust backend APIs.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Uddav Goshika">
+    </div>
+    <div class="person-info">
+        <h3>Uddav Goshika</h3>
+        <p class="role">Java Full Stack Developer</p>
+        <small>Web • APIs • LLM • AI</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Java full stack developer with interest in AI, LLMs, and building
+            intelligent, scalable systems.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Srihari Boini">
+    </div>
+    <div class="person-info">
+        <h3>Srihari Boini</h3>
+        <p class="role">Frontend Developer</p>
+        <small>Java • UI/UX • Databases</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Frontend developer passionate about clean UI/UX, responsive design,
+            and seamless user experiences.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://www.clipartmax.com/png/middle/103-1038880_user-rubber-stamp-female-user-icon.png" alt="Chandini">
+    </div>
+    <div class="person-info">
+        <h3>Chandini</h3>
+        <p class="role">UI/UX Designer</p>
+        <small>Design Systems • Branding</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Creative UI/UX designer specializing in design systems,
+            branding, and user-centered product experiences.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://www.clipartmax.com/png/middle/103-1038880_user-rubber-stamp-female-user-icon.png" alt="Swathi">
+    </div>
+    <div class="person-info">
+        <h3>Swathi</h3>
+        <p class="role">Mobile Developer</p>
+        <small>Flutter • Android • iOS</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Mobile application developer building high-quality cross-platform
+            apps using Flutter and native technologies.
+        </p>
+    </div>
+</div>
+
+
+<div class="person-card">
+    <div class="person-image">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/7296447-icone-utilisateur-dans-le-style-plat-icone-personne-symbole-client-vectoriel.jpg" alt="Pavan Pappula">
+    </div>
+    <div class="person-info">
+        <h3>Pavan Pappula</h3>
+        <p class="role">Database Engineer</p>
+        <small>Manual • Automation • Performance</small>
+    </div>
+    <div class="person-about">
+        <p>
+            Database and QA engineer focused on data reliability, performance
+            testing, and system stability.
+        </p>
+    </div>
+</div>
+
+
+
+
+  <button class="open-team-btn moreteam" onclick="openTeamPopup()">More ➺</button>
+
+      </div>
+    </div>
+
+
+
+
+
+
+</template>
+
+
+
+
+
+<!-- footer section  -->
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Brand -->
+    <div class="footer-col">
+      <h3 class="footer-brand">E-Advocate Services</h3>
+      <p class="footer-desc">
+        India's premier legal platform connecting advocates and clients with trust and transparency.
+      </p>
+    </div>
+
+    <!-- Explore -->
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#" data-link="home">Home</a>
+      <a href="#" data-link="search">Advance Search</a>
+      <a href="#" data-link="stories">Success Stories</a>
+      <a href="" data-link="file-case">File a Case</a>
+      <a href="#" data-link="blog">Create Blog</a>
+      <a href="#" data-link="status">Case Status</a>
+    </div>
+
+    <!-- More -->
+    <div class="footer-col">
+      <h4>More</h4>
+      <a href="#" data-link="membership">Membership Options</a>
+      <a href="#" data-link="careers">Careers</a>
+      <a href="#" data-link="how-it-works">How it Works</a>
+      <a href="#" data-link="credits">Credits</a>
+      <a href="#" data-link="sitemap">Site Map</a>
+      <a href="#" data-link="about">About Us</a>
+    </div>
+
+    <!-- For Advocates -->
+    <div class="footer-col">
+      <h4>For Advocates</h4>
+      <a href="#" data-link="find-clients">Find Clients</a>
+      <a href="#" data-link="adv-how">How it Works</a>
+    </div>
+
+    <!-- For Clients -->
+    <div class="footer-col">
+      <h4>For Clients</h4>
+      <a href="#" data-link="find-adv">Find Advocates</a>
+      <a href="#" data-link="client-how">How it Works</a>
+    </div>
+
+    <!-- Help -->
+    <div class="footer-col">
+      <h4>Help</h4>
+      <a href="#" data-link="help">Help</a>
+      <a href="#" data-link="centers">E-Advocate Centers</a>
+    </div>
+
+    <!-- Legal -->
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#" data-link="fraud">Fraud Alert</a>
+      <a href="#" data-link="terms">Terms of Use</a>
+      <a href="#" data-link="third-party">Third Party Terms of Use</a>
+      <a href="#" data-link="privacy">Privacy Policy</a>
+      <a href="#" data-link="cookies">Cookie Policy</a>
+    </div>
+
+    <!-- Privacy Features -->
+    <div class="footer-col">
+      <h4>Privacy Features</h4>
+      <a href="#" data-link="summons">Summons / Notices</a>
+      <a href="#" data-link="grievances">Grievances</a>
+      <a href="#" data-link="refund">Refund Policy</a>
+    </div>
+
+  </div>
+
+
+
+<div class="footer-connect">
+
+         <h1 class="downtext">Download Our App:</h1>
+         <img src="/socialmedia.jpeg" alt="App Store" class="appstore">
+
+        <div class="footer-connect-content">
+        <h4>Connect With Us</h4>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com/e_advocate_services/" target="_blank" title="Instagram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+            </a>
+
+            <a href="https://www.facebook.com/eadvocateservices" target="_blank" title="Facebook">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg">
+            </a>
+
+            <a href="https://www.linkedin.com/in/e-advocate-services/" target="_blank" title="LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg">
+            </a>
+
+            <a href="https://www.pinterest.com/eadvocateservices/" target="_blank" title="Pinterest">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/pinterest.svg">
+            </a>
+
+            <a href="https://www.youtube.com/channel/UCkl_3tG975FVRBEmleOZRng" target="_blank" title="YouTube">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
+            </a>
+
+            <a href="https://x.com/eadvocateservic" target="_blank" title="Twitter X">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg">
+            </a>
+
+            <a href="https://www.threads.com/@e_advocate_services" target="_blank" title="Threads">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/threads.svg">
+            </a>
+
+            <a href="https://t.me/tatitoprojects" target="_blank" title="Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">
+            </a>
+
+            <a href="https://wa.me/917093704706" target="_blank" title="WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
+            </a>
+         </div>
+
+           <p class="footer-mail">
+            📧 <a href="mailto:info.eadvocateservices@gmail.com">info.eadvocateservices@gmail.com</a><br>
+            📧 <a href="mailto:tatitoprojects@gmail.com">support@tatitoprojects.com</a> |
+            <a href="mailto:support@eadvocateservices.com">support@eadvocateservices.com</a>
+         </p>
+      </div>
+     </div>
+   
+
+  <div class="footer-approvals">
+
+      <div class="footer-box">
+        <h4>Approved By</h4>
+        <div class="footer-logos">
+          <img src="Digital-india-White.webp">
+          <img src="indiagovin.webp">
+        </div>
+      </div>
+
+      <div class="footer-box">
+        <h4>Partnership</h4>
+        <div class="footer-logos">
+          <img src="doj.webp">
+          <img src="ecomitte.webp">
+        </div>
+      </div>
+
+      <div class="footer-box">
+        <h4>Collaboration</h4>
+        <div class="footer-logos">
+          <img src="india_code.webp">
+          <img src="nic.webp">
+        </div>
+      </div>
+
+      <div class="footer-box">
+        <h4>Association</h4>
+        <div class="footer-logos">
+          <img src="bar-council.webp">
+          <img src="Digital-india-White.webp">
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  <div class="footer-bottom">
+    © 2025 E-Advocate Services. All Rights Reserved.<br>
+    made with ❤️ by Ilearn Nexus Technology Team
+  </div>
+</footer>
+
+
+
+
+
+
+<script src="script.js" defer></script>
+</body>
+</html>
