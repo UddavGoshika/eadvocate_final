@@ -1234,55 +1234,6 @@ function initProfileDropdown() {
 }
 
 
-
-// function updateNavbarAuth() {
-//   const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-//   const loginBtn = document.querySelector(".loginnav");
-//   const registerBtn = document.querySelector(".registernav");
-//   const profileNav = document.querySelector(".profile-nav");
-
-//   if (loggedIn) {
-//     loginBtn && (loginBtn.style.display = "none");
-//     registerBtn && (registerBtn.style.display = "none");
-//     profileNav && (profileNav.style.display = "block");
-
-//     setAvatarInitials();
-//     initProfileDropdown();
-//   } else {
-//     loginBtn && (loginBtn.style.display = "block");
-//     registerBtn && (registerBtn.style.display = "block");
-//     profileNav && (profileNav.style.display = "none");
-//   }
-// }
-
-// function updateNavbarAuth() {
-//   const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-//   const loginBtn = document.querySelector(".loginnav");
-//   const registerBtn = document.querySelector(".registernav");
-//   const profileNav = document.querySelector(".profile-nav");
-
-//   if (loggedIn) {
-//     loginBtn && (loginBtn.style.display = "none");
-//     registerBtn && (registerBtn.style.display = "none");
-//     // profileNav && (profileNav.style.display = "block");
-//     profileNav?.classList.add("show");
-
-//       setAvatarInitials();
-
-//     // ⏳ Wait for DOM paint, then init dropdown
-//     setTimeout(initProfileDropdown, 0);
-//   } else {
-//     loginBtn && (loginBtn.style.display = "block");
-//     registerBtn && (registerBtn.style.display = "block");
-//     // profileNav && (profileNav.style.display = "none");
-//     profileNav?.classList.remove("show");
-
-
-//   }
-// }
-
 function updateNavbarAuth() {
   const loggedIn = localStorage.getItem("isLoggedIn") === "true";
 
@@ -1346,32 +1297,6 @@ function isLoggedIn() {
 }
 
 
-
-// function renderPage() {
-//   const route = location.hash.replace("#", "") || "home";
-//   const tpl = document.getElementById(route);
-
-//   if (!tpl || !app) {
-//     app.innerHTML = "<h1>404</h1>";
-//     return;
-//   }
-
-//   if (route === "dashboard" && !isLoggedIn()) {
-//     location.hash = "login";
-//     return;
-//   }
-
-//   app.innerHTML = tpl.innerHTML;
-
-//   // Page-specific init
-//   if (route === "home") initHome();
-//   if (route === "dashboard") initDashboard();
-// if (route === "blogs") initBlogPage();  // ← ADD THIS LINE
-//   updateNavbarAuth(); // 🔑 IMPORTANT
-//   initadvocateDashboard();
-
-//   window.scrollTo(0, 0);
-// }
 function backblog(){
 
       location.hash = "home";
@@ -1791,3 +1716,11 @@ function initBlogPage() {
   if (!document.getElementById("blg-title")) return;
   loadBlog(0);
 }
+
+
+
+
+
+
+
+
