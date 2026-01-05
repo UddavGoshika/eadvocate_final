@@ -638,73 +638,77 @@ document.getElementById("prevBtn").onclick = ()=>{
   if(current>0){current--;update();}
 };
 
-// // chatbot helper logic code 
 
-// const chatWidget = document.getElementById("chatWidget");
-// const chatToggle = document.getElementById("chatToggle");
-// const chatMessages = document.getElementById("chatMessages");
-// const chatInput = document.getElementById("chatInput");
-// const notificationDot = document.querySelector(".notification-dot");
 
-// let chatOpen = false;
+// chatbot helper logic code 
 
-// /* TOGGLE CHAT */
-// function toggleChat(){
-//   chatOpen = !chatOpen;
-//   chatWidget.style.display = chatOpen ? "flex" : "none";
-//   notificationDot.style.display = "none";
-// }
+const chatWidget = document.getElementById("chatWidget");
+const chatToggle = document.getElementById("chatToggle");
+const chatMessages = document.getElementById("chatMessages");
+const chatInput = document.getElementById("chatInput");
+const notificationDot = document.querySelector(".notification-dot");
 
-// /* SEND MESSAGE */
-// function sendChatMessage(){
-//   const text = chatInput.value.trim();
-//   if(!text) return;
+let chatOpen = false;
 
-//   addMessage(text,"user");
-//   chatInput.value = "";
+/* TOGGLE CHAT */
+function toggleChat(){
+  chatOpen = !chatOpen;
+  // chatWidget.style.display = chatOpen ? "flex" : "none";
+chatWidget.style.display = "none";
 
-//   setTimeout(()=>{
-//     addMessage(getBotReply(text),"bot");
-//     if(!chatOpen){
-//       notificationDot.style.display="block";
-//     }
-//   },700);
-// }
+  notificationDot.style.display = "none";
+}
 
-// /* ADD MESSAGE */
-// function addMessage(text,type){
-//   const msg = document.createElement("div");
-//   msg.className = `message ${type}`;
-//   msg.innerHTML = `<div class="message-content">${text}</div>`;
-//   chatMessages.appendChild(msg);
-//   chatMessages.scrollTop = chatMessages.scrollHeight;
-// }
+/* SEND MESSAGE */
+function sendChatMessage(){
+  const text = chatInput.value.trim();
+  if(!text) return;
 
-// /* SIMPLE BOT LOGIC (replace with AI later) */
-// function getBotReply(input){
-//   input = input.toLowerCase();
+  addMessage(text,"user");
+  chatInput.value = "";
 
-//   if(input.includes("lawyer") || input.includes("advocate"))
-//     return "I can help you find a verified advocate based on your legal issue.";
+  setTimeout(()=>{
+    addMessage(getBotReply(text),"bot");
+    if(!chatOpen){
+      notificationDot.style.display="block";
+    }
+  },700);
+}
 
-//   if(input.includes("case") || input.includes("legal help"))
-//     return "Please tell me your case type (Criminal, Civil, Family, Corporate).";
+/* ADD MESSAGE */
+function addMessage(text,type){
+  const msg = document.createElement("div");
+  msg.className = `message ${type}`;
+  msg.innerHTML = `<div class="message-content">${text}</div>`;
+  chatMessages.appendChild(msg);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
-//   if(input.includes("price") || input.includes("fee"))
-//     return "Consultation fees vary by advocate experience and case complexity.";
+/* SIMPLE BOT LOGIC (replace with AI later) */
+function getBotReply(input){
+  input = input.toLowerCase();
 
-//   return "Thank you for reaching out. Please provide more details so I can assist you better.";
-// }
+  if(input.includes("lawyer") || input.includes("advocate"))
+    return "I can help you find a verified advocate based on your legal issue.";
 
-// /* ENTER KEY SUPPORT */
-// chatInput.addEventListener("keydown",e=>{
-//   if(e.key==="Enter") sendChatMessage();
-// });
+  if(input.includes("case") || input.includes("legal help"))
+    return "Please tell me your case type (Criminal, Civil, Family, Corporate).";
 
-// /* INITIAL NOTIFICATION */
-// setTimeout(()=>{
-//   if(!chatOpen) notificationDot.style.display="block";
-// },2000);
+  if(input.includes("price") || input.includes("fee"))
+    return "Consultation fees vary by advocate experience and case complexity.";
+
+  return "Thank you for reaching out. Please provide more details so I can assist you better.";
+}
+
+/* ENTER KEY SUPPORT */
+chatInput.addEventListener("keydown",e=>{
+  if(e.key==="Enter") sendChatMessage();
+});
+
+/* INITIAL NOTIFICATION */
+setTimeout(()=>{
+  if(!chatOpen) notificationDot.style.display="block";
+},2000);
 
 
 

@@ -208,7 +208,7 @@ header.navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 8px 8px;
   border-radius: 14px;
   background: linear-gradient(
     135deg,
@@ -289,7 +289,7 @@ header.navbar {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 8px 8px;
   color: var(--text-main);
   min-width: 180px;
   font-size: 14px;
@@ -864,7 +864,7 @@ z-index:-999;
           LOGIN / REGISTER BUTTONS
         ================================ */
         .loginnav {
-          padding: 6px 14px;
+          padding: 6px 8px;
           gap: 16px;
           text-decoration:none;
           border-radius: 8px;
@@ -3483,28 +3483,213 @@ background:
 }
 
 /* overlay */
-.auth-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(2,6,23,.85);
-  backdrop-filter:blur(10px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
+/* =====================================================
+   AUTH OVERLAY - RESPONSIVE
+===================================================== */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: flex-start; /* Changed from center to flex-start */
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px; /* Added padding */
+  overflow-y: auto; /* Enable scrolling if needed */
 }
 
-/* modal */
-.auth-box{
-  width:420px;
-  background:linear-gradient(180deg,#1e293b,#0f172a);
-  border-radius:16px;
-  padding:26px;
-  color:#e5e7eb;
-  position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
+/* Modal container */
+.auth-box {
+  width: 100%;
+  max-width: 420px; /* Changed from fixed width to max-width */
+  background: linear-gradient(180deg, #1e293b, #0f172a);
+  border-radius: 16px;
+  padding: 26px;
+  color: #e5e7eb;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  margin-top: 80px; /* Added margin-top to avoid navbar */
+  margin-bottom: 20px; /* Added margin-bottom for mobile */
 }
 
+/* =====================================================
+   RESPONSIVE ADJUSTMENTS
+===================================================== */
+
+/* For very small screens (mobile) */
+@media (max-width: 480px) {
+  .auth-overlay {
+    padding: 10px; /* Reduce padding on mobile */
+    align-items: center; /* Center on mobile */
+  }
+  
+  .auth-box {
+    margin-top: 10px; /* Less margin on mobile */
+    padding: 20px; /* Reduce padding */
+    max-width: 95%; /* Use more width */
+    width: 100%;
+  }
+}
+
+/* For tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .auth-box {
+    margin-top: 60px;
+    max-width: 400px;
+  }
+}
+
+/* For laptops with smaller screens (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .auth-box {
+    margin-top: 70px;
+    max-width: 420px;
+  }
+}
+
+/* For desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .auth-box {
+    margin-top: 80px;
+    max-width: 420px;
+  }
+}
+
+/* For very tall screens (height > 900px) */
+@media (min-height: 900px) {
+  .auth-overlay {
+    align-items: center; /* Center vertically on tall screens */
+  }
+  
+  .auth-box {
+    margin-top: 0; /* Remove top margin */
+  }
+}
+
+/* For very short screens (height < 600px) - mobile landscape */
+@media (max-height: 600px) {
+  .auth-overlay {
+    align-items: flex-start; /* Stick to top */
+    padding-top: 5px; /* Minimal padding */
+  }
+  
+  .auth-box {
+    margin-top: 5px;
+    max-height: 95vh; /* Limit height */
+    overflow-y: auto; /* Make scrollable */
+  }
+}
+
+/* =====================================================
+   NAVBAR HEIGHT COMPENSATION
+===================================================== */
+/* Calculate dynamic margin based on navbar height */
+.auth-box {
+  margin-top: calc(var(--nav-height, 80px) + 20px);
+}
+
+/* =====================================================
+   SMOOTH ANIMATIONS
+===================================================== */
+.auth-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.auth-overlay[style*="display: flex"] {
+  opacity: 1;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+.auth-box {
+  animation: slideInModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideInModal {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   SCROLL HANDLING
+===================================================== */
+/* When modal is open, prevent body scroll */
+body.auth-modal-open {
+  overflow: hidden;
+}
+
+/* Modal scrollbar styling */
+.auth-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.auth-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.auth-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.auth-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* =====================================================
+   CLOSE BUTTON POSITIONING
+===================================================== */
+/* If you have a close button, ensure it's always visible */
+.auth-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.auth-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* On mobile, make close button larger for touch */
+@media (max-width: 480px) {
+  .auth-close-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+}
 /* header */
 .auth-header{
   display:flex;
@@ -7084,4 +7269,51 @@ body{
 }
 
 
+.download-app {
+  text-align: center;
+  padding: 20px;
+}
+
+.downtext {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+/* Store buttons row */
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Store images */
+.store-img {
+  width: 160px;
+  max-width: 45%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.store-img:hover {
+  transform: scale(1.05);
+}
+
+
+/* .appstore{
+  width:100px;
+} */
+
+/* Mobile */
+@media (max-width: 480px) {
+  .downtext {
+    font-size: 1.5rem;
+  }
+
+  .store-img {
+    width: 140px;
+  }
+}
 
