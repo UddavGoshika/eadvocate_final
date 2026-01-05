@@ -449,7 +449,15 @@
 
 
 
+function hidelay(){
+  document.querySelector(".navbar")?.classList.add("hidden");
+  document.querySelector(".footer")?.classList.add("hidden");
 
+}
+function showlay(){
+  document.querySelector(".navbar")?.classList.remove("hidden");
+  document.querySelector(".footer")?.classList.remove("hidden");
+}
 
 
 // //login and registerr js logic
@@ -524,6 +532,7 @@ if (e.target.id === "loginForm") {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userName", "Demo User");
       updateNavbarAuth();
+      hidelay();
        closeAuth();
 
       location.hash = "dashboard";
@@ -532,6 +541,7 @@ if (e.target.id === "loginForm") {
       localStorage.setItem("userName", "Demo User");
       updateNavbarAuth();
            closeAuth();
+           hidelay();
 
       location.hash = "clientdashboard";
     }
@@ -540,6 +550,7 @@ if (e.target.id === "loginForm") {
       localStorage.setItem("userName", "Demo User");
       updateNavbarAuth();
        closeAuth();
+       hidelay();
 
       location.hash = "advocatedashboard"; 
     }
@@ -550,6 +561,11 @@ if (e.target.id === "loginForm") {
   }
 
 });
+
+
+
+
+
 
 
 
@@ -1752,6 +1768,7 @@ function initDashboard() {
 function logout() {
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("userName");
+  showlay();
 
   updateNavbarAuth();
   location.hash = "home";
@@ -1871,6 +1888,14 @@ function initadvocateDashboard() {
    INIT
 ===================================================== */
 window.addEventListener("DOMContentLoaded", () => {
+
+
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  document.querySelector(".navbar")?.classList.toggle("hidden", isLoggedIn);
+  document.querySelector(".footer")?.classList.toggle("hidden", isLoggedIn);
+
   initNavbar();
   initChat();
     updateNavbarAuth(); // 👈 load avatar on refresh
