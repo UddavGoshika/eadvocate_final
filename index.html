@@ -31,7 +31,7 @@
 
       <button id="font-minus">A-</button>
       <button id="font-plus">A+</button>
-      <button id="theme-toggle">🌙</button>
+      <!-- <button id="theme-toggle">🌙</button> -->
       <select id="language-switcher">
         <option>EN</option><option>ES</option><option>FR</option><option>AR</option>
       </select>
@@ -50,11 +50,21 @@
             
 
 
-        <li><input type="search" id="site-search" class="searchbar"name="q" placeholder="Enter search terms..."></li>
+        <li>
+  <input 
+    type="search"
+    id="site-search"
+    class="searchbar"
+    name="q"
+    placeholder="Enter search terms..."
+    autocomplete="off"
+  >
+  <ul id="search-suggestions" class="suggestions"></ul>
+</li>
         <!--  -->
 
-        <li><a href="#" class="loginnav" onclick="openAuth('login')">Login</a></li>
-        <li><a href="#" class="registernav" onclick="openAuth('register')">Register</a></li>
+        <li><a href="#" class="loginnav" style="padding:7px 20px;" onclick="openAuth('login')">Login</a></li>
+        <li><a href="#" class="registernav" style="padding:7px 20px;" onclick="openAuth('register')">Register</a></li>
 
         <!-- <li class="accountnav" style="display:none;">
           <a href="#dashboard">My Account</a>
@@ -504,7 +514,8 @@
   <div class="popup-box">
     
     <div class="popup-header">
-      <h2>Filter Advocate Profiles</h2>
+      <h2>Filter Advocate Profiles     <input value="" placeholder="Search by Id" style="width:250px;margin-left:50px;"></input></h2> 
+
       <span class="close-btn" onclick="closebrowseprofiles()">×</span>
     </div>
 
@@ -737,28 +748,16 @@
 e-Advocate Services      </h1>
 
       <p class="hero-subtitle">
-A secure digital bridge between clients and independent advocates. Discover trusted professionals, connect instantly, and communicate with confidence through a neutral, technology-enabled platform.      </p>
+A secure digital bridge between clients and independent advocates. Discover trusted professionals, connect instantly, and communicate with confidence through a neutral, technology-enabled platform.   
+   </p>
 
 
+<div class="herrobuttons"  >
+      <a href="#" class="loginnav" style="z-index:9999; margin-right:10px;" onclick="openAuth('login')">Login</a>
+      <a href="#" class="registernav" style="z-index:9999; margin-right:10px;" onclick="openAuth('register')">Register</a>
+</div>
 
-      <a href="#" class="loginnav" onclick="openAuth('login')">Login</a>
-      <a href="#" class="registernav" onclick="openAuth('register')">Register</a>
 
-
-      <!-- <div class="hero-buttons">
-        <a href="#" class="btn-primary">
-          Book Consultation
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a href="#" class="btn-secondary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="5 3 19 12 5 21 5 3"/>
-          </svg>
-          Watch Demo
-        </a>
-      </div> -->
 
       <div class="stats">
         <div class="stat-item">
@@ -791,9 +790,12 @@ A secure digital bridge between clients and independent advocates. Discover trus
           This method is useful when you do not have a case or filing number.
         </p>
 
-        <button class="case-btn">
+        <a href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=f067194eef3086576d80d26dc4e2d8947f6d267537072d2915f69e920137c4e3"style="text-decoration:none;" class="case-btn">
+          search by party Name 
+        </a>
+        <!-- <button class="case-btn" >
           Search by Party Name →
-        </button>
+        </button> -->
       </div>
     </div>
 
@@ -810,9 +812,16 @@ A secure digital bridge between clients and independent advocates. Discover trus
           as registered with the court.
         </p>
 
-        <button class="case-btn">
+        <!-- <button class="case-btn">
           Search by Case Number →
-        </button>
+        </button> -->
+
+        <a href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=3f58d687f37395f38228105882c8cb2b5019fedfa2c69537da5f927bb18ee0ad" style="text-decoration:none;" class="case-btn">
+          Search by Case Number →
+        </a>
+        
+
+
       </div>
     </div>
 
@@ -826,10 +835,16 @@ A secure digital bridge between clients and independent advocates. Discover trus
           Locate case information using advocate name, FIR number,
           or applicable act where supported.
         </p>
-
+<!-- 
         <button class="case-btn">
           Explore Search Options →
-        </button>
+        </button> -->
+      
+        <a href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=f067194eef3086576d80d26dc4e2d8947f6d267537072d2915f69e920137c4e3" style="text-decoration:none;"class="case-btn">
+          Explore Search Options →
+        </a>
+        
+      
       </div>
     </div>
 
@@ -843,9 +858,12 @@ A secure digital bridge between clients and independent advocates. Discover trus
           or applicable act where supported.
         </p>
 
-        <button class="case-btn">
+
+        <a href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=3f58d687f37395f38228105882c8cb2b5019fedfa2c69537da5f927bb18ee0ad" style="text-decoration:none;"class="case-btn">
           Explore Search Options →
-        </button>
+        </a>
+        
+
       </div>
     </div>
 
@@ -876,18 +894,23 @@ A secure digital bridge between clients and independent advocates. Discover trus
 <!-- filterr advocates -->
 
 
-<section class="advocate-section">
+<section class="advocate-section" id="browsehomepage">
   <h2>Browse Profiles</h2>
   <p class="advocate-subtitle">Search, filter, and connect with top-rated legal professionals.</p>
 
-  <div class="blogsection">   
-  <div class="filters">
 
-      <button >CLient</button> 
-     <button> Advocates</button>
-  
 
-  <!-- Filters -->
+  <!-- <div class="blogsection">   
+
+<div class="btn-row">
+  <button class="tab-btn active">Client</button>
+  <button class="tab-btn">Advocates</button>
+</div>
+
+
+    <div class="filters">
+
+
     <select id="filter-location">
       <option value="">Location</option>
       <option value="Mumbai">Mumbai</option>
@@ -912,22 +935,69 @@ A secure digital bridge between clients and independent advocates. Discover trus
     <button onclick="applyFilters()">Apply Filters</button>
   </div>
   
-  <!-- Advocates List -->
   <div id="advocates-container" class="advocates-grid"></div>
 
-  </div>
+  </div> -->
+
+
+
+
+<!-- FILTERS -->
+<!-- TOGGLE -->
+<div class="toggle-bar">
+  <button id="advBtn" class="active" onclick="showAdvocates()">Advocates</button>
+  <button id="clientBtn" onclick="showClients()">Clients</button>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <select id="locationFilter">
+    <option value="">Location</option>
+    <option>Mumbai</option>
+    <option>Delhi</option>
+    <option>Bangalore</option>
+    <option>Hyderabad</option>
+    <option>Pune</option>
+    <option>Chennai</option>
+  </select>
+
+  <select id="experienceFilter">
+    <option value="">Experience</option>
+    <option value="10">10+</option>
+    <option value="12">12+</option>
+    <option value="15">15+</option>
+  </select>
+
+  <select id="specializationFilter">
+    <option value="">Specialization</option>
+    <option>Corporate Law</option>
+    <option>Criminal Defense</option>
+    <option>Family Law</option>
+    <option>Business Owner</option>
+    <option>IT Professional</option>
+    <option>Home Buyer</option>
+  </select>
+
+  <button onclick="applyFilters()">Apply Filters</button>
+</div>
+
+<!-- GRID -->
+<div class="bloggrid" id="grid"></div>
+
+
+
 </section>
 
 
 
 <!-- file a case and section 3rd page  -->
-
+<!-- 
 <section class="eadvocate-section">
     <h2 class="section-title">e-Advocate Services</h2>
     <p class="section-sub">Quick access to legal filing & case tracking</p>
     <div class="services-outer">
-      <!-- Row 1 -->
-      <div class="service-row visible">
+       Row 1 -->
+      <!-- <div class="service-row visible">
         <div class="service-content">
           <div class="content-glass">
             <h3>File Case</h3>
@@ -946,9 +1016,8 @@ A secure digital bridge between clients and independent advocates. Discover trus
           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop" alt="File Case 2">
         </div>
       </div>
-      <!-- Row 2 -->
-      <!-- Row 2: Case Status - Image LEFT, Content RIGHT -->
-        <div class="service-row visible reverse">  <!-- ADD 'reverse' HERE -->
+     
+        <div class="service-row visible reverse">
         <div class="service-content">
             <div class="content-glass">
             <h3>Case Status</h3>
@@ -970,7 +1039,6 @@ A secure digital bridge between clients and independent advocates. Discover trus
 
   <div class="case-slidersec-container">
 
-    <!-- SLIDE 1 -->
     <div class="case-slidesec active">
       <img src="/fil4.jpeg" alt="Search by Party Name">
 
@@ -983,7 +1051,6 @@ A secure digital bridge between clients and independent advocates. Discover trus
       </div>
     </div>
 
-    <!-- SLIDE 2 -->
 
     
     <div class="case-slide">
@@ -998,7 +1065,6 @@ A secure digital bridge between clients and independent advocates. Discover trus
       </div>
     </div>
 
-    <!-- SLIDE 3 -->
     <div class="case-slide">
       <img src="/fil2.jpeg" alt="Search by Advocate or FIR">
 
@@ -1024,13 +1090,11 @@ A secure digital bridge between clients and independent advocates. Discover trus
     </div>
 
 
-    <!-- CONTROLS -->
     <div class="case-controls">
       <button onclick="prevSlide()">❮</button>
       <button onclick="nextSlide()">❯</button>
     </div>
 
-    <!-- DOTS -->
     <div class="case-dots">
       <span class="dot active" onclick="goToSlide(0)"></span>
       <span class="dot" onclick="goToSlide(1)"></span>
@@ -1044,6 +1108,157 @@ A secure digital bridge between clients and independent advocates. Discover trus
         </div>
     </div>
   </section>
+  -->
+
+
+<section class="eadvocate-section">
+  <h2 class="section-title">e-Advocate Services</h2>
+  <p class="section-sub">Quick access to legal filing & case tracking</p>
+
+  <div class="services-outer">
+
+    <!-- ROW 1 : FILE CASE -->
+    <div class="service-row visible">
+      <div class="service-content">
+        <div class="content-glass">
+          <h3>File Case</h3>
+          <div class="service-icon">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/documents.png">
+          </div>
+          <p>
+            File cases, petitions, appeals and FIR related submissions
+            digitally through official portals.
+          </p>
+          <a href="https://filing.ecourts.gov.in/pdedev/" target="_blank" class="card-btn">
+            Proceed
+          </a>
+        </div>
+      </div>
+
+      <!-- IMAGE SLIDER -->
+      <div class="service-image slider-box">
+        <div class="slider">
+          <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800">
+            
+            
+
+
+              <a 
+                href="https://filing.ecourts.gov.in/pdedev/" 
+                target="_blank"
+                class="slide-caption"
+              >
+              file a case
+              </a> 
+            
+            <!-- <span style="cursor:pointer;">File a Case</span> -->
+
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?w=800">
+          </div>
+        </div>
+
+        <button class="nav prev">❮</button>
+        <button class="nav next">❯</button>
+        <div class="dots"></div>
+      </div>
+    </div>
+
+    <!-- ROW 2 : CASE STATUS -->
+    <div class="service-row visible reverse">
+      <div class="service-content">
+        <div class="content-glass">
+          <h3>Case Status</h3>
+          <div class="service-icon">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/search--v1.png">
+          </div>
+          <p>
+            Track live case status, hearing dates, judgments and court
+            orders using official portals.
+          </p>
+          <a href="https://services.ecourts.gov.in/ecourtindia_v6/"
+             target="_blank"
+             class="card-btn">
+            Track Now
+          </a>
+        </div>
+      </div>
+
+      <!-- IMAGE SLIDER -->
+      <div class="service-image slider-box">
+        <div class="slider">
+          <div class="slide active">
+            <img src="/fil4.jpeg">
+            <a 
+                href="https://services.ecourts.gov.in/ecourtindia_v6/" 
+                target="_blank"
+                class="slide-caption"
+              >
+                Search by Party Name →
+              </a>   
+           </div>
+          <div class="slide">
+            <img src="/fil3.jpeg">
+
+              <a 
+                href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=31b2ad3d899f71cb8471deadbcd288d49978c2527f4d5af43d15382613d714d9" 
+                target="_blank"
+                class="slide-caption"
+              >
+                Search by Case Number
+              </a>  
+
+          </div>
+          <div class="slide">
+            <img src="/fil2.jpeg">
+            <!-- <span style="cursor:pointer;">Search by Advocate / FIR</span> -->
+
+            <a 
+                href="https://services.ecourts.gov.in/ecourtindia_v6/?p=casestatus/index&app_token=31b2ad3d899f71cb8471deadbcd288d49978c2527f4d5af43d15382613d714d9" 
+                target="_blank"
+                class="slide-caption"
+              >
+            Search by Advocate / FIR
+              </a>  
+          </div>
+
+          <div class="slide">
+            <img src="/fil1.jpeg">
+            
+            <a 
+                href="https://services.ecourts.gov.in/ecourtindia_v6/?p=home/index&app_token=d93c5d9b64fc9b93d34028846af0bbae8e0bd07c9e44f30af35eb681989cb8b1" 
+                target="_blank"
+                class="slide-caption"
+              >
+            Search by CNR Number
+              </a>  
+
+
+
+
+            
+            <!-- <span style="cursor:pointer;">Search by CNR Number</span> -->
+
+          </div>
+        </div>
+
+        <button class="nav prev">❮</button>
+        <button class="nav next">❯</button>
+        <div class="dots"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
 
 
 
@@ -1504,29 +1719,31 @@ A secure digital bridge between clients and independent advocates. Discover trus
 
 
 
-      <!-- <div class="franchise-panel premium-panel">
-  <h3>Unlock Advanced e-Advocate Features</h3>
+<div class="franchise-panel free-panel">
+  <h3>Join e-Advocate — Free Registration</h3>
 
   <p>
-    Upgrade to Premium to access enhanced visibility, priority discovery,
-    and advanced digital tools designed to support independent advocates.
+    Create your free e-Advocate profile and start connecting with clients
+    through a secure, technology-enabled legal services platform.
   </p>
 
   <ul class="premium-points grid-2">
-    <li>✔ Priority profile visibility to users</li>
-    <li>✔ Enhanced profile & practice details</li>
-    <li>✔ Advanced client communication tools</li>
-    <li>✔ Analytics & engagement insights</li>
+    <li>✔ Free advocate profile listing</li>
+    <li>✔ Basic visibility to potential clients</li>
+    <li>✔ Receive client interest & inquiries</li>
+    <li>✔ Access to essential case-tracking tools</li>
   </ul>
 
-  <a href="#subscription" onclick="switchPage('subscription')" class="franchise-action premium-action">
-    Upgrade to Premium →
+  <a href="#register" onclick="openAuth('register')" class="franchise-action free-action">
+    Register For Free →
   </a>
 
   <span class="premium-note">
-    Tatito is a technology platform only. No legal advice or consultation is provided.
+    e-Advocate is a technology facilitation platform only. No legal advice or consultation is provided.
   </span>
-</div> -->
+</div>
+
+
 
 
       
@@ -1635,7 +1852,7 @@ A secure digital bridge between clients and independent advocates. Discover trus
 
 <template id="mainblogs">
 
-<section class="blg-container">
+<!-- <section class="blg-container">
 
 
 
@@ -1645,7 +1862,6 @@ A secure digital bridge between clients and independent advocates. Discover trus
 
 
 
-  <!-- BLOG LIST -->
   <aside class="blg-sidebar">
 
 <div class="haed" style="display:flex; gap:20px;">
@@ -1678,14 +1894,12 @@ A secure digital bridge between clients and independent advocates. Discover trus
     </ul>
   </aside>
 
-  <!-- BLOG CONTENT -->
   <main class="blg-content">
     <h1 id="blg-title"></h1>
     <p class="blg-meta" id="blg-meta"></p>
 
     <article id="blg-body"></article>
 
-    <!-- NAVIGATION -->
     <div class="blg-nav">
       <button onclick="prevBlog()">← Previous</button>
       <span id="blg-counter"></span>
@@ -1693,9 +1907,22 @@ A secure digital bridge between clients and independent advocates. Discover trus
     </div>
   </main>
 
-</section>
+</section> -->
 
+<div class="blog-grid" id="blog-grid"></div>
+    <div class="loader" id="loader">Loading more articles...</div>
 
+    <!-- Professional Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                E-Advocate Services Articles
+                <span class="close-btn" id="close-btn">×</span>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="loader" id="modal-loader">Loading more articles...</div>
+        </div>
+    </div>
 
 </template>
 
@@ -2679,8 +2906,1468 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 
 
 
+<!--footer membership-->
+<template id="membership">
+
+<section class="footer-membership">
+
+  <h2>Membership Plans</h2>
+  <p>
+    Upgrade your E-Advocate Services membership to access verified legal professionals,
+    confidential consultations, and priority legal assistance.
+  </p>
+
+  <div class="plan-wrapper">
+
+    <!-- FREE PLAN -->
+    <div class="plan">
+      <h3>Free</h3>
+      <ul>
+        <li><span class="icon check">✓</span>Browse advocate profiles</li>
+        <li><span class="icon check">✓</span>Shortlist advocates</li>
+        <li><span class="icon check">✓</span>Send consultation requests</li>
+        <li><span class="icon cross">✕</span>Priority case visibility</li>
+        <li><span class="icon cross">✕</span>Advanced legal search filters</li>
+        <li><span class="icon cross">✕</span>View advocate contact details</li>
+        <li><span class="icon cross">✕</span>Unlimited voice & video calls</li>
+        <li><span class="icon cross">✕</span>Dedicated case manager</li>
+      </ul>
+      <button class="free-btn">Register Free</button>
+    </div>
+
+    <!-- PAID PLAN -->
+    <div class="plan pro">
+      <h3>Advocate Pro</h3>
+      <ul>
+        <li><span class="icon check">✓</span>Browse verified advocates</li>
+        <li><span class="icon check">✓</span>Priority consultation requests</li>
+        <li><span class="icon check">✓</span>Unlimited messaging & chat</li>
+        <li><span class="icon check">✓</span>Higher case match visibility</li>
+        <li><span class="icon check">✓</span>Advanced legal search access</li>
+        <li><span class="icon check">✓</span>View advocate contact details</li>
+        <li><span class="icon check">✓</span>Unlimited voice & video calls</li>
+        <li><span class="icon check">✓</span>Confidential & secure case handling</li>
+      </ul>
+      <button class="pro-btn">Browse Membership Plans</button>
+    </div>
+
+  </div>
+
+</section>
+
+</template>
 
 
+<template id="careers">
+ <!-- Careers Footer Section : E-Advocate Services -->
+<div class="footer-column footer-careers">
+
+  <h4>Careers at E-Advocate</h4>
+
+  <p class="footer-description">
+    E-Advocate Services is building a secure digital ecosystem to connect citizens
+    with verified legal professionals across India. We welcome advocates,
+    legal scholars, technologists, and support professionals who believe in
+    ethical practice, confidentiality, and access to justice.
+  </p>
+
+  <ul class="footer-links">
+
+    <li>
+      <a href="/careers/advocates">
+        Advocate & Law Firm Partnerships
+      </a>
+      <span class="footer-subtext">
+        Join our verified advocate network and offer professional legal services
+        while maintaining full independence and client confidentiality.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/legal-internships">
+        Legal Internships & Clerkships
+      </a>
+      <span class="footer-subtext">
+        Opportunities for law students and fresh graduates to gain exposure to
+        digital legal platforms, case workflows, and legal research.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/legal-research">
+        Legal Research & Content Roles
+      </a>
+      <span class="footer-subtext">
+        Contribute to legal articles, case summaries, compliance documentation,
+        and knowledge resources aligned with Indian laws.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/technology">
+        Technology & Platform Development
+      </a>
+      <span class="footer-subtext">
+        Roles for developers, UI/UX designers, cybersecurity professionals,
+        and system architects focused on secure legal technology.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/support">
+        Client & Advocate Support
+      </a>
+      <span class="footer-subtext">
+        Assist users and advocates with onboarding, platform guidance,
+        and issue resolution while maintaining privacy standards.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/compliance">
+        Compliance & Quality Assurance
+      </a>
+      <span class="footer-subtext">
+        Help ensure adherence to professional ethics, data protection norms,
+        and platform policies.
+      </span>
+    </li>
+
+    <li>
+      <a href="/careers/freelance">
+        Freelance & Remote Opportunities
+      </a>
+      <span class="footer-subtext">
+        Flexible engagement options for legal experts, writers, designers,
+        and technical contributors.
+      </span>
+    </li>
+
+  </ul>
+
+  <p class="footer-note">
+    E-Advocate Services does not guarantee employment, client volume, or income.
+    All roles and partnerships are subject to verification, applicable laws,
+    and platform terms.
+  </p>
+
+</div>
+</template>
+
+
+<template id="Howitworks">
+<div class="container">
+
+  <h5>How It Works</h5>
+  <p class="updated">
+    E-Advocate Services
+  </p>
+
+  <p>
+    E-Advocate Services is a technology facilitation platform designed to help users
+    responsibly connect with advocates while respecting professional ethics and
+    applicable Indian laws. Below is a simple step-by-step explanation of how the
+    platform works.
+  </p>
+
+  <hr>
+
+  <h5>1. User Registration</h5>
+  <p>
+    Users can create an account by providing basic information such as name, mobile
+    number or email, and location. Only essential details are collected.
+  </p>
+
+  <h5>2. Advocate Discovery</h5>
+  <p>
+    Users can browse advocate profiles based on practice area, location, and experience.
+    Profiles are informational in nature and comply with professional conduct standards.
+  </p>
+
+  <h5>3. Connection Request</h5>
+  <p>
+    After selecting an advocate, the user may send a connection request. No advocate is
+    obligated to accept any request.
+  </p>
+
+  <h5>4. Advocate Response</h5>
+  <p>
+    Advocates may review and either accept or reject the request. Communication is
+    enabled only after acceptance.
+  </p>
+
+  <h5>5. Secure Communication</h5>
+  <p>
+    Once connected, users and advocates may communicate securely through the platform
+    to understand the matter and decide whether to proceed further.
+  </p>
+
+  <h5>6. Independent Legal Engagement</h5>
+  <p>
+    Any legal services, advice, fees, or representation are handled independently
+    between the advocate and the client, outside the platform's control.
+  </p>
+
+  <h5>7. Platform Role Limitation</h5>
+  <p>
+    E-Advocate Services does not provide legal advice, guarantee outcomes, fix fees,
+    or interfere in professional decisions. The platform functions only as a facilitator.
+  </p>
+
+  <h5>8. User Responsibility</h5>
+  <p>
+    Users are responsible for verifying advocate details, safeguarding their accounts,
+    and complying with applicable laws and platform policies.
+  </p>
+
+  <h5>9. Transparency & Compliance</h5>
+  <p>
+    All platform operations are designed to align with ethical standards prescribed
+    by the Bar Council of India and relevant Indian laws.
+  </p>
+
+</div>
+</template>
+
+<template id="Sitemap">
+
+<div class="container">
+
+  <h1>Site Map</h1>
+  <p class="updated">
+<section class="sitemap">
+
+  <h4>E-Advocate Services Sitemap</h4>
+
+  <div class="sitemap-grid">
+
+    <div>
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About E-Advocate</a></li>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#mainblogs">Legal Blogs</a></li>
+        <li><a href="#contact">Contact & Support</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>User Access</h4>
+      <ul>
+        <li><a href="#" onclick="openAuth('login')">Login</a></li>
+        <li><a href="#" onclick="openAuth('register')">Register</a></li>
+        <li><a href="#">Client Registration</a></li>
+        <li><a href="#">Advocate Registration</a></li>
+        <li><a href="#">Forgot Password</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Client Services</h4>
+      <ul>
+        <li><a href="#" onclick="openbrowseprofiles()">Browse Advocates</a></li>
+        <li><a href="#">Online Consultation</a></li>
+        <li><a href="#">Offline Consultation</a></li>
+        <li><a href="#">Submit Legal Request</a></li>
+        <li><a href="#">Case Follow-ups</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Advocate Services</h4>
+      <ul>
+        <li><a href="#advocatedashboard">Advocate Dashboard</a></li>
+        <li><a href="#myprofile">Manage Profile</a></li>
+        <li><a href="#">Client Requests</a></li>
+        <li><a href="#">Availability Management</a></li>
+        <li><a href="#">Practice Areas</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Dashboards</h4>
+      <ul>
+        <li><a href="#dashboard">Admin Dashboard</a></li>
+        <li><a href="#clientdashboard">Client Dashboard</a></li>
+        <li><a href="#advocatedashboard">Advocate Dashboard</a></li>
+        <li><a href="#settings">Account Settings</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Legal Tools</h4>
+      <ul>
+        <li><a href="https://filing.ecourts.gov.in/pdedev/" target="_blank">File a Case</a></li>
+        <li><a href="https://services.ecourts.gov.in/ecourtindia_v6/" target="_blank">Case Status</a></li>
+        <li><a href="#">Legal Assistant</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Fraud Alert</a></li>
+        <li><a href="#">Third-Party Terms</a></li>
+        <li><a href="#">Disclaimer</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Tatito Network</h4>
+      <ul>
+        <li><a href="#">Tatito Edverse</a></li>
+        <li><a href="#">Tatito Career Hub</a></li>
+        <li><a href="#">Tatito Nexus</a></li>
+        <li><a href="#">Tatito Civic One</a></li>
+        <li><a href="#">Tatito Health+</a></li>
+        <li><a href="#">Tatito Fashions</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+</template>
+<!-- ========= END SITEMAP ========= -->
+
+
+<template id="ABOUTUS">
+       <div class="container">
+
+  <h4>E-Advocate Services</h4>
+  <p class="updated">
+    A Complete A-to-Z Platform Explanation (BCI-Compliant)
+  </p>
+
+  <hr>
+
+  <h5>1. Platform Philosophy (Built as per BCI Norms)</h5>
+  <p>
+    E-Advocate Services is built with one non-negotiable principle:
+    <strong>Technology must support the legal profession, not violate it.</strong>
+  </p>
+  <p>
+    From day one, the platform is designed to comply with professional conduct standards
+    issued by the Bar Council of India.
+  </p>
+  <p>Therefore:</p>
+  <ul>
+    <li>No solicitation</li>
+    <li>No advertising of advocates</li>
+    <li>No success guarantees</li>
+    <li>No outcome promises</li>
+    <li>No commission-based inducement</li>
+    <li>No interference in advocate independence</li>
+  </ul>
+  <p>
+    E-Advocate Services is a technology facilitation platform only, not a law firm and not a
+    legal service provider.
+  </p>
+
+  <h5>2. What Exactly is E-Advocate Services?</h5>
+  <p>
+    E-Advocate Services is a structured digital platform that enables:
+  </p>
+  <ul>
+    <li>Ethical discovery of advocates</li>
+    <li>Secure communication between users and advocates</li>
+    <li>Transparent, consent-based engagement</li>
+    <li>Legal awareness through informational content</li>
+  </ul>
+  <p>The platform does not:</p>
+  <ul>
+    <li>Provide legal advice</li>
+    <li>File cases on behalf of users</li>
+    <li>Represent clients</li>
+    <li>Decide legal strategy</li>
+    <li>Control advocate fees</li>
+  </ul>
+  <p>
+    All legal services are rendered independently by enrolled advocates.
+  </p>
+
+  <h5>3. Who the Platform is For</h5>
+
+  <h5>A. Clients (Public Users)</h5>
+  <ul>
+    <li>Anyone in India who needs legal assistance</li>
+    <li>Users who want to find an advocate responsibly</li>
+    <li>Users seeking clarity without false promises</li>
+  </ul>
+
+  <h5>B. Advocates</h5>
+  <ul>
+    <li>Advocates enrolled with a State Bar Council</li>
+    <li>Independent practitioners</li>
+    <li>Professionals seeking ethical digital visibility</li>
+  </ul>
+
+  <h5>4. Account Registration – How It Works</h5>
+
+  <h5>Client Registration</h5>
+  <p>Clients can register using:</p>
+  <ul>
+    <li>Name</li>
+    <li>Mobile number / email</li>
+    <li>Location (city/state)</li>
+  </ul>
+  <p>No unnecessary or sensitive data is forced.</p>
+
+  <h5>Advocate Registration</h5>
+  <p>Advocates register by providing:</p>
+  <ul>
+    <li>Full name</li>
+    <li>State Bar Council enrollment number</li>
+    <li>Practice areas</li>
+    <li>Experience details</li>
+    <li>Office location</li>
+  </ul>
+  <p>
+    ⚠️ Advocate profiles are informational only, not promotional.
+  </p>
+
+  <h5>5. Advocate Profile Structure (BCI-Safe)</h5>
+  <p>Each
+
+    </template>
+
+<template id="contactPopupTemplate">
+  <div id="tatitoContactPopup" class="tatito-popup-overlay" onclick="closeContactPopup(event)">
+    <div class="tatito-popup-container" onclick="event.stopPropagation()">
+      <div class="tatito-popup-header">
+        <h3 class="tatito-popup-title">📞 Contact E-Advocate Support</h3>
+        <button class="tatito-popup-close" onclick="closeContactPopup()">&times;</button>
+      </div>
+      
+      <div class="tatito-popup-content">
+        <div class="tatito-contact-grid">
+          
+          <div class="tatito-contact-card tatito-phone-card">
+            <div class="tatito-contact-icon">📞</div>
+            <div class="tatito-contact-details">
+              <h4 class="tatito-contact-type">Phone Support</h4>
+              <a href="tel:+917093704706" class="tatito-contact-value">+91 70937 04706</a>
+              <p class="tatito-contact-note">Available: Mon-Sat, 10 AM - 6 PM IST</p>
+            </div>
+          </div>
+          
+          <div class="tatito-contact-card tatito-email-card">
+            <div class="tatito-contact-icon">📧</div>
+            <div class="tatito-contact-details">
+              <h4 class="tatito-contact-type">Email Support</h4>
+              <div class="tatito-email-list">
+                <a href="mailto:tatitoprojects@gmail.com" class="tatito-contact-value">tatitoprojects@gmail.com</a>
+                <a href="mailto:support@tatitoprojects.com" class="tatito-contact-value">support@tatitoprojects.com</a>
+              </div>
+              <p class="tatito-contact-note">Response within 24 hours</p>
+            </div>
+          </div>
+          
+          <div class="tatito-contact-card tatito-hours-card">
+            <div class="tatito-contact-icon">⏰</div>
+            <div class="tatito-contact-details">
+              <h4 class="tatito-contact-type">Working Hours</h4>
+              <div class="tatito-hours-list">
+                <div class="tatito-hour-item">
+                  <span class="tatito-hour-day">Monday - Friday</span>
+                  <span class="tatito-hour-time">10:00 AM - 6:00 PM</span>
+                </div>
+                <div class="tatito-hour-item">
+                  <span class="tatito-hour-day">Saturday</span>
+                  <span class="tatito-hour-time">10:00 AM - 2:00 PM</span>
+                </div>
+                <div class="tatito-hour-item">
+                  <span class="tatito-hour-day">Sunday</span>
+                  <span class="tatito-hour-time">Closed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tatito-contact-card tatito-note-card">
+            <div class="tatito-contact-icon">ℹ️</div>
+            <div class="tatito-contact-details">
+              <h4 class="tatito-contact-type">Important Note</h4>
+              <p class="tatito-contact-note">For urgent legal matters, please contact local authorities or emergency services. This platform provides technical and account support only.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="tatito-popup-footer">
+        <button class="tatito-popup-btn tatito-copy-btn" onclick="copyContactDetails()">📋 Copy Contact Info</button>
+        <button class="tatito-popup-btn tatito-close-btn" onclick="closeContactPopup()">Close</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+
+<template id="fruadalert">
+<section class="fraud-section">
+  <div class="fraud-container">
+
+    <h2>Fraud Alert</h2>
+    <p class="updated">
+      E-Advocate Services
+    </p>
+
+    <p>
+      E-Advocate Services is committed to protecting users and advocates from fraud,
+      impersonation, and misuse of the platform name. This section outlines common
+      risks, prohibited activities, and safety guidance.
+    </p>
+
+    <hr>
+
+    <h3>1. No Guaranteed Results or Promises</h3>
+    <ul>
+      <li>Guarantee case outcomes</li>
+      <li>Promise legal success</li>
+      <li>Assure favorable court decisions</li>
+      <li>Offer fast-track or “fixed” case results</li>
+    </ul>
+    <p>
+      Any person or entity making such claims using the platform name is not
+      associated with E-Advocate Services.
+    </p>
+
+    <h3>2. No Commission-Based or Paid Matchmaking</h3>
+    <ul>
+      <li>No payments are taken for connecting users with advocates</li>
+      <li>No priority listings are sold</li>
+      <li>No inducements are offered for selecting any advocate</li>
+    </ul>
+
+    <h3>3. Impersonation & Fake Profiles</h3>
+    <p>
+      Creating or using fake profiles or impersonating advocates, courts,
+      authorities, or platform representatives is strictly prohibited.
+    </p>
+
+    <h3>4. Unauthorized Communications</h3>
+    <ul>
+      <li>We never request OTPs or passwords</li>
+      <li>No payment requests via personal numbers or messaging apps</li>
+      <li>No legal threats through informal channels</li>
+    </ul>
+
+    <h3>5. Payments & Financial Safety</h3>
+    <ul>
+      <li>Verify payment requests carefully</li>
+      <li>Avoid sharing financial details with unknown parties</li>
+      <li>Use authorized payment methods only</li>
+    </ul>
+
+    <h3>6. Misuse of Platform Name</h3>
+    <p>
+      Any misuse of the E-Advocate Services name, logo, or identity may result
+      in legal action under applicable Indian laws.
+    </p>
+
+    <h3>7. Reporting Suspicious Activity</h3>
+    <ul>
+      <li>Suspicious messages or calls</li>
+      <li>Fake advocate profiles</li>
+      <li>Unauthorized payment requests</li>
+      <li>Impersonation attempts</li>
+    </ul>
+
+    <h3>8. Platform Safeguards</h3>
+    <ul>
+      <li>Profile verification checks</li>
+      <li>Activity monitoring for abuse patterns</li>
+      <li>Account suspension and blocking mechanisms</li>
+    </ul>
+
+    <h3>9. Legal Consequences</h3>
+    <ul>
+      <li>Immediate account termination</li>
+      <li>Reporting to law-enforcement authorities</li>
+      <li>Civil or criminal action under Indian law</li>
+    </ul>
+
+    <h3>10. User Responsibility</h3>
+    <p>
+      Users are responsible for safeguarding their accounts, verifying communications,
+      and exercising caution when sharing personal or financial information.
+    </p>
+
+  </div>
+</section>
+
+
+       </template>
+
+       
+
+<template id="termsofuse">
+<section class="terms-section">
+  <div class="terms-container">
+
+    <h2>Terms of Use</h2>
+    <!-- <p class="updated">
+      E-Advocate Services<br>
+      Last updated: <strong>[Add Date]</strong>
+    </p> -->
+
+    <p>
+      These Terms of Use (“Terms”) govern access to and use of the E-Advocate Services
+      website and mobile application (“Platform”). By accessing or using the Platform,
+      you agree to be bound by these Terms.
+    </p>
+
+    <p>If you do not agree, please discontinue use immediately.</p>
+
+    <hr>
+
+    <h3>1. Purpose of the Platform</h3>
+    <p>E-Advocate Services is a technology facilitation platform designed to enable users to:</p>
+    <ul>
+      <li>Discover and connect with advocates</li>
+      <li>Share basic case-related information</li>
+      <li>Communicate for lawful legal consultation purposes</li>
+    </ul>
+    <p>
+      The Platform does not provide legal advice and does not act as an advocate or law firm.
+      All legal services are provided independently by advocates in accordance with
+      applicable laws and rules issued by the Bar Council of India.
+    </p>
+
+    <h3>2. Eligibility to Use</h3>
+    <ul>
+      <li>You are 18 years or older</li>
+      <li>You are legally capable of entering into contracts</li>
+      <li>You provide accurate and truthful information</li>
+    </ul>
+    <p>Advocates must be validly enrolled with a State Bar Council in India.</p>
+
+    <h3>3. Account Registration & Access</h3>
+    <ul>
+      <li>Users are responsible for maintaining confidentiality of login credentials</li>
+      <li>You are responsible for all activities under your account</li>
+      <li>Any unauthorized use must be reported immediately</li>
+    </ul>
+
+    <h3>4. Acceptable Use Policy</h3>
+    <ul>
+      <li>Impersonate advocates, clients, or officials</li>
+      <li>Upload false, misleading, or illegal information</li>
+      <li>Solicit clients or advertise legal services unlawfully</li>
+      <li>Harass, threaten, or abuse other users</li>
+      <li>Attempt to hack, scrape, or disrupt the Platform</li>
+    </ul>
+
+    <h3>5. Governing Law & Jurisdiction</h3>
+    <p>
+      These Terms are governed by the laws of India.
+      All disputes shall be subject to the jurisdiction of Indian courts only.
+    </p>
+
+  </div>
+</section>
+        </template>
+
+<template id="third-partyTermsofUse">
+<div class="container">
+
+  <h4>Third-Party Terms of Use</h4>
+  <p class="updated">
+    E-Advocate Services
+  </p>
+
+  <p>
+    This Third-Party Terms of Use section explains how E-Advocate Services interacts with
+    third-party platforms, services, and tools that may be integrated with or linked from
+    our website or mobile application.
+  </p>
+
+  <hr>
+
+  <h4>1. Use of Third-Party Services</h4>
+  <p>
+    E-Advocate Services may rely on third-party service providers for limited and essential
+    functions such as:
+  </p>
+  <ul>
+    <li>Website and application hosting</li>
+    <li>Cloud infrastructure and data storage</li>
+    <li>Security and fraud prevention</li>
+    <li>Messaging or notification delivery</li>
+    <li>Payment gateway processing (if applicable)</li>
+  </ul>
+  <p>
+    These services are used strictly to operate and improve the platform.
+  </p>
+
+  <h4>2. Third-Party Links</h4>
+  <p>
+    The platform may contain links to third-party websites or services for user convenience.
+    E-Advocate Services does not control, endorse, or assume responsibility for the content,
+    policies, or practices of such third parties.
+  </p>
+
+  <h4>3. Independent Terms & Policies</h4>
+  <p>
+    Third-party services operate under their own terms of use, privacy policies, and
+    conditions. Users are advised to review the applicable third-party terms before
+    engaging with such services.
+  </p>
+
+  <h4>4. No Liability for Third-Party Actions</h4>
+  <p>
+    E-Advocate Services shall not be liable for:
+  </p>
+  <ul>
+    <li>Availability or performance of third-party services</li>
+    <li>Data handling practices of third parties</li>
+    <li>Losses or damages arising from third-party platforms</li>
+    <li>Disputes between users and third-party providers</li>
+  </ul>
+
+  <h4>5. Limited Data Sharing</h4>
+  <p>
+    Where integration with third-party services is required, only the minimum necessary
+    data is shared to enable platform functionality.
+  </p>
+  <p>
+    Third-party providers are contractually required to:
+  </p>
+  <ul>
+    <li>Maintain confidentiality</li>
+    <li>Use data only for agreed purposes</li>
+    <li>Comply with applicable Indian laws</li>
+  </ul>
+
+  <h4>6. Payments via Third-Party Gateways</h4>
+  <p>
+    If payment features are enabled, all transactions are processed through third-party
+    payment gateways. E-Advocate Services does not store sensitive financial information.
+  </p>
+  <p>
+    Refunds, chargebacks, and transaction disputes are subject to the terms and policies
+    of the respective payment gateway and financial institutions.
+  </p>
+
+  <h4>7. External Communication Platforms</h4>
+  <p>
+    Any communication conducted outside the platform (such as phone calls, email, or
+    messaging applications) is governed by the terms and policies of the respective
+    third-party service providers.
+  </p>
+  <p>
+    E-Advocate Services does not monitor or control such external communications.
+  </p>
+
+  <h4>8. Compliance & Legal Standards</h4>
+  <p>
+    Use of third-party services through the platform is subject to:
+  </p>
+  <ul>
+    <li>Applicable Indian laws</li>
+    <li>Information Technology Act, 2000</li>
+    <li>Relevant IT Rules</li>
+    <li>Professional and ethical standards applicable to legal platforms</li>
+  </ul>
+
+  <h4>9. Changes to Third-Party Terms</h4>
+  <p>
+    E-Advocate Services reserves the right to update this Third-Party Terms of Use section
+    at any time. Continued use of the platform constitutes acceptance of the updated terms.
+  </p>
+
+</div>
+
+
+
+
+  </template>
+
+
+
+  <template id="privacy-policy">
+            <div class="page-wrapper">
+    <div class="policy-card">
+
+      <h4>Privacy Policy</h4>
+      <!-- <div class="updated-date">
+        E-Advocate Services<br>
+        Last updated: <strong>[Add Date]</strong>
+      </div> -->
+
+      <p>
+        E-Advocate Services (“Platform”, “we”, “our”, “us”) is committed to protecting
+        the privacy and personal data of its users, including clients, advocates, and visitors.
+        This Privacy Policy explains how we collect, use, store, disclose, and protect your
+        information in compliance with applicable Indian laws and professional standards,
+        including guidelines issued by the Bar Council of India (BCI).
+      </p>
+
+      <p>
+        By accessing or using our website or mobile application, you agree to the terms
+        of this Privacy Policy.
+      </p>
+
+      <h4>1. Scope of This Policy</h4>
+      <p>This policy applies to:</p>
+      <ul>
+        <li>Website: E-Advocate Services</li>
+        <li>Mobile applications (Android / iOS)</li>
+        <li>All services, features, and communications provided through the platform</li>
+      </ul>
+      <p>
+        This policy does not provide legal advice and does not create an advocate-client
+        relationship by itself.
+      </p>
+
+      <h4>2. Information We Collect</h4>
+
+      <h3>A. Information You Provide Voluntarily</h3>
+
+      <p><strong>For Clients:</strong></p>
+      <ul>
+        <li>Name</li>
+        <li>Mobile number</li>
+        <li>Email address</li>
+        <li>Location (city/state)</li>
+        <li>Case category/details (only what you choose to share)</li>
+      </ul>
+
+      <p><strong>For Advocates:</strong></p>
+      <ul>
+        <li>Name</li>
+        <li>Mobile number & email</li>
+        <li>Bar Council enrollment number</li>
+        <li>Practice area(s)</li>
+        <li>Experience details</li>
+        <li>Office location</li>
+        <li>Verification documents (as required)</li>
+      </ul>
+
+      <div class="note">
+        ⚠️ We do not publish sensitive personal information publicly without explicit user consent.
+      </div>
+
+      <h4>B. Automatically Collected Information</h4>
+      <ul>
+        <li>IP address</li>
+        <li>Device information</li>
+        <li>Browser/app usage data</li>
+        <li>Log files and timestamps</li>
+      </ul>
+
+      <p><strong>Used strictly for:</strong></p>
+      <ul>
+        <li>Security</li>
+        <li>Performance improvement</li>
+        <li>Fraud prevention</li>
+      </ul>
+
+      <h4>3. Purpose of Data Collection</h4>
+      <ul>
+        <li>User registration & verification</li>
+        <li>Connecting clients with advocates</li>
+        <li>Platform communication (notifications, updates)</li>
+        <li>Compliance with legal and regulatory requirements</li>
+        <li>Preventing misuse or fraud</li>
+      </ul>
+
+      <p>We do not sell, rent, or trade user data.</p>
+
+      <h4>4. Advocate–Client Confidentiality</h4>
+      <ul>
+        <li>All communications between advocates and clients are private</li>
+        <li>We do not read, monitor, or interfere with legal communications</li>
+        <li>Professional confidentiality remains the responsibility of the advocate</li>
+      </ul>
+
+      <h4>5. Data Sharing & Disclosure</h4>
+      <p>We may share information only when legally required, including:</p>
+      <ul>
+        <li>Court orders</li>
+        <li>Government or law-enforcement requests</li>
+        <li>Regulatory compliance</li>
+      </ul>
+      <p>We never share data for advertising or commercial resale.</p>
+
+      <h4>6. Data Storage & Security</h4>
+      <ul>
+        <li>Secure servers</li>
+        <li>Encrypted data transmission</li>
+        <li>Access control mechanisms</li>
+        <li>Regular security audits</li>
+      </ul>
+      <p>
+        While we take strong precautions, no digital platform can guarantee 100% security.
+        Users should protect their login credentials.
+      </p>
+
+      <h4>7. Cookies & Tracking</h4>
+      <p>
+        We may use cookies to improve user experience, analyze traffic, and maintain session integrity.
+        Users can control cookies through browser settings.
+      </p>
+
+      <h4>8. User Rights</h4>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Correct inaccurate information</li>
+        <li>Request deletion (subject to legal obligations)</li>
+        <li>Withdraw consent where applicable</li>
+      </ul>
+
+      <div class="contact">
+        Requests can be sent to:<br>
+        📧 <strong>[your official support email]</strong>
+      </div>
+
+      <h4>9. Third-Party Links</h4>
+      <p>
+        Our platform may contain links to third-party websites. We are not responsible
+        for their privacy practices or content.
+      </p>
+
+      <h4>10. Children’s Privacy</h4>
+      <p>
+        Our services are not intended for users under 18 years of age.
+        We do not knowingly collect data from minors.
+      </p>
+
+      <h4>11. Compliance with Indian Laws</h4>
+      <ul>
+        <li>Information Technology Act, 2000</li>
+        <li>IT Rules, 2011</li>
+        <li>Applicable data protection principles in India</li>
+        <li>Professional conduct standards for advocates</li>
+      </ul>
+
+      <h4>12. Policy Updates</h4>
+      <p>
+        We may update this Privacy Policy periodically. Updates will be posted on this page
+        with the revised date. Continued use of the platform indicates acceptance.
+      </p>
+
+    </div>
+</template>
+
+
+<template id="CookiePolicy">
+        <div class="container">
+
+  <h4>Cookie Policy</h4>
+  <!-- <p class="updated">
+    E-Advocate Services<br>
+    Last updated: <strong>[Add Date]</strong>
+  </p> -->
+
+  <p>
+    This Cookie Policy explains how E-Advocate Services (“Platform”, “we”, “our”, “us”)
+    uses cookies and similar technologies when you visit or use our website and related
+    online services.
+  </p>
+
+  <p>
+    By continuing to use our website, you consent to the use of cookies as described
+    in this policy.
+  </p>
+
+  <hr>
+
+  <h4>1. What Are Cookies?</h4>
+  <p>
+    Cookies are small text files stored on your device (computer, mobile, or tablet)
+    when you visit a website. They help websites function properly, improve user
+    experience, and provide security.
+  </p>
+
+  <h4>2. Types of Cookies We Use</h4>
+
+  <h4>A. Strictly Necessary Cookies</h4>
+  <p>
+    These cookies are essential for the website to function and cannot be disabled.
+    They are used for:
+  </p>
+  <ul>
+    <li>User authentication</li>
+    <li>Session management</li>
+    <li>Security and fraud prevention</li>
+    <li>Load balancing</li>
+  </ul>
+  <p>
+    Without these cookies, the website may not work correctly.
+  </p>
+
+  <h4>B. Functional Cookies</h4>
+  <p>
+    These cookies help improve usability and remember user preferences such as:
+  </p>
+  <ul>
+    <li>Language selection</li>
+    <li>Region or location</li>
+    <li>Login preferences</li>
+  </ul>
+  <p>
+    These cookies do not collect personal data for advertising.
+  </p>
+
+  <h4>C. Performance & Analytics Cookies</h4>
+  <p>
+    These cookies help us understand how users interact with the website by collecting
+    anonymous usage data, such as:
+  </p>
+  <ul>
+    <li>Pages visited</li>
+    <li>Time spent on pages</li>
+    <li>Error logs</li>
+  </ul>
+  <p>
+    This helps us improve performance and reliability.
+  </p>
+
+  <h4>D. Third-Party Cookies</h4>
+  <p>
+    Some cookies may be placed by third-party services used for:
+  </p>
+  <ul>
+    <li>Analytics</li>
+    <li>Security monitoring</li>
+    <li>Performance optimization</li>
+  </ul>
+  <p>
+    Such cookies are governed by the respective third-party privacy and cookie policies.
+  </p>
+
+  <h4>3. Cookies We Do NOT Use</h4>
+  <p>
+    E-Advocate Services does not use cookies for:
+  </p>
+  <ul>
+    <li>Targeted advertising</li>
+    <li>Behavioral tracking</li>
+    <li>Selling user data</li>
+    <li>Cross-site marketing</li>
+  </ul>
+  <p>
+    This aligns with ethical standards and professional norms applicable to legal
+    platforms and advocates regulated by the Bar Council of India.
+  </p>
+
+  <h4>4. How You Can Control Cookies</h4>
+  <p>
+    You can manage or disable cookies through your browser settings:
+  </p>
+  <ul>
+    <li>Block all cookies</li>
+    <li>Delete existing cookies</li>
+    <li>Receive alerts when cookies are used</li>
+  </ul>
+  <p>
+    Please note: disabling essential cookies may affect website functionality.
+  </p>
+
+  <h4>5. Cookies on Mobile Applications</h4>
+  <p>
+    Our mobile applications may use similar technologies (such as SDKs) for:
+  </p>
+  <ul>
+    <li>Security</li>
+    <li>Performance</li>
+    <li>Crash reporting</li>
+  </ul>
+  <p>
+    These are not used for advertising purposes.
+  </p>
+
+  <h4>6. Data Protection & Privacy</h4>
+  <p>
+    Any information collected through cookies is handled in accordance with our
+    Privacy Policy and applicable Indian data protection laws.
+  </p>
+
+  <h4>7. Changes to This Policy</h4>
+  <p>
+    We may update this Cookie Policy from time to time.
+    Any changes will be posted on this page with the updated date.
+    Continued use of the website after changes constitutes acceptance of the
+    updated policy.
+  </p>
+
+</div>
+
+        </template>
+
+
+
+<template id="Summons/Notices">
+             <div class="container">
+
+  <h4>Summons / Legal Notices</h4>
+  <!-- <p class="updated">
+    E-Advocate Services<br>
+    Last updated: <strong>[Add Date]</strong>
+  </p> -->
+
+  <p>
+    This page explains the official procedure for serving legal notices, summons,
+    or communications to E-Advocate Services and clarifies the platform’s role with
+    respect to legal proceedings involving users or advocates.
+  </p>
+
+  <hr>
+
+  <h4>1. Purpose of This Page</h4>
+  <p>
+    E-Advocate Services is a technology facilitation platform and not a law firm.
+  </p>
+  <p>
+    This page ensures transparency regarding:
+  </p>
+  <ul>
+    <li>Service of legal notices</li>
+    <li>Court summons</li>
+    <li>Regulatory communications</li>
+    <li>Government or law-enforcement requests</li>
+  </ul>
+
+  <h4>2. How to Serve Legal Notices to E-Advocate Services</h4>
+  <p>
+    All legal notices, summons, or official communications intended for
+    E-Advocate Services must be sent only through the official channels mentioned below.
+  </p>
+  <p><strong>Accepted Mode:</strong></p>
+  <ul>
+    <li>📧 Official Email: <strong>[legal@yourdomain.com or support email]</strong></li>
+  </ul>
+  <p>
+    Notices sent through personal emails, WhatsApp, SMS, social media, or verbal
+    communication will not be considered valid service.
+  </p>
+
+  <h4>3. Notices Related to Advocates or Clients</h4>
+  <ul>
+    <li>E-Advocate Services is not a party to advocate–client disputes</li>
+    <li>Legal notices intended for individual advocates or users must be addressed directly to them</li>
+    <li>We do not accept notices on behalf of advocates or clients</li>
+  </ul>
+  <p>
+    Professional responsibility remains solely with the concerned advocate,
+    in accordance with rules prescribed by the Bar Council of India.
+  </p>
+
+  <h4>4. Court Orders & Government Requests</h4>
+  <p>
+    We may comply with:
+  </p>
+  <ul>
+    <li>Court orders</li>
+    <li>Law-enforcement requests</li>
+    <li>Government or regulatory directions</li>
+  </ul>
+  <p>
+    Only when such requests are:
+  </p>
+  <ul>
+    <li>Issued by a competent authority</li>
+    <li>Properly served through lawful means</li>
+  </ul>
+  <p>
+    Any data disclosure will be limited strictly to what is legally required.
+  </p>
+
+  <h4>5. No Platform Liability for User Actions</h4>
+  <p>
+    E-Advocate Services shall not be liable for:
+  </p>
+  <ul>
+    <li>Legal advice provided by advocates</li>
+    <li>Acts or omissions of users</li>
+    <li>Case outcomes, filings, or court proceedings</li>
+    <li>Failure of users to respond to notices served outside the platform</li>
+  </ul>
+
+  <h4>6. Digital Communications Disclaimer</h4>
+  <ul>
+    <li>Platform notifications, emails, or messages are not legal notices</li>
+    <li>In-app messages must not be treated as substitutes for court summons or statutory notices</li>
+    <li>The platform does not guarantee delivery or acknowledgment of legal communications between users</li>
+  </ul>
+
+  <h4>7. False or Malicious Notices</h4>
+  <p>
+    Any attempt to:
+  </p>
+  <ul>
+    <li>Send fake legal notices</li>
+    <li>Impersonate courts, authorities, or advocates</li>
+    <li>Misuse the platform name for intimidation</li>
+  </ul>
+  <p>
+    May result in:
+  </p>
+  <ul>
+    <li>Account suspension</li>
+    <li>Reporting to law-enforcement authorities</li>
+    <li>Legal action under applicable Indian laws</li>
+  </ul>
+
+  <h4>8. Updates to This Policy</h4>
+  <p>
+    This page may be updated periodically to reflect changes in law or platform operations.
+    The latest version published on the website shall prevail.
+  </p>
+
+</div>
+
+        
+    </template>
+
+
+
+
+
+    <template id="Grievances">
+<div class="container">
+
+  <h4>Grievance </h4>
+  <p class="updated">
+    E-Advocate Services
+  </p>
+
+  <p>
+    E-Advocate Services is committed to addressing user concerns in a fair, transparent,
+    and timely manner. This Grievance Redressal section explains how users can raise
+    grievances related to the platform.
+  </p>
+
+  <hr>
+
+  <h4>1. Scope of Grievances</h4>
+  <p>
+    Users may raise grievances related to:
+  </p>
+  <ul>
+    <li>Platform misuse or policy violations</li>
+    <li>Account or profile-related issues</li>
+    <li>Privacy or data protection concerns</li>
+    <li>Technical or access-related problems</li>
+    <li>Impersonation or fraudulent activity on the platform</li>
+  </ul>
+
+  <h4>2. Matters Not Covered</h4>
+  <p>
+    The platform does not handle grievances related to:
+  </p>
+  <ul>
+    <li>Legal advice provided by advocates</li>
+    <li>Advocate–client disputes</li>
+    <li>Professional conduct of advocates outside the platform</li>
+    <li>Case outcomes, court proceedings, or legal strategy</li>
+  </ul>
+
+  <h4>3. How to Submit a Grievance</h4>
+  <p>
+    Grievances may be submitted through official support channels only.
+  </p>
+  <ul>
+    <li>📧 Email: <strong>[official grievance / support email]</strong></li>
+    <li>📌 Subject Line: <strong>Grievance – E-Advocate Services</strong></li>
+  </ul>
+  <p>
+    Users are advised to include clear details of the issue to facilitate review.
+  </p>
+
+  <h4>4. Review & Resolution Process</h4>
+  <p>
+    Upon receipt of a grievance:
+  </p>
+  <ul>
+    <li>The grievance will be acknowledged within a reasonable timeframe</li>
+    <li>Relevant details will be reviewed internally</li>
+    <li>Appropriate action will be taken in accordance with platform policies and law</li>
+  </ul>
+
+  <h4>5. Resolution Timeline</h4>
+  <p>
+    E-Advocate Services aims to address and resolve valid grievances within a reasonable
+    period, subject to the nature and complexity of the issue.
+  </p>
+
+  <h4>6. User Cooperation</h4>
+  <p>
+    Users are expected to cooperate during the grievance review process and provide
+    accurate and complete information when requested.
+  </p>
+
+  <h4>7. Misuse of Grievance Mechanism</h4>
+  <p>
+    Submitting false, misleading, or malicious grievances may result in appropriate
+    action, including account suspension, as permitted by law.
+  </p>
+
+  <h4>8. Legal Compliance</h4>
+  <p>
+    The grievance mechanism is maintained in accordance with applicable Indian laws,
+    including the Information Technology Act, 2000 and relevant rules.
+  </p>
+
+</div>
+
+</template>
+
+
+
+
+
+
+<template id="RefundPolicy">
+              <div class="container">
+
+  <h4>Refund Policy</h4>
+  
+
+  <p>
+    This Refund Policy explains the circumstances under which refunds may or may not be
+    issued for payments made on E-Advocate Services (“Platform”, “we”, “our”, “us”).
+    By using the Platform or making any payment, you agree to this Refund Policy.
+  </p>
+
+  <hr>
+
+  <h4>1. Nature of Payments on the Platform</h4>
+  <p>
+    E-Advocate Services operates as a technology facilitation platform to help users
+    connect with advocates.
+  </p>
+  <p>
+    Payments on the Platform may include:
+  </p>
+  <ul>
+    <li>Platform subscription or usage fees (if applicable)</li>
+    <li>Feature access fees</li>
+    <li>Third-party service charges</li>
+  </ul>
+  <p>
+    ⚠️ Advocate professional fees are not determined, controlled, or guaranteed by
+    E-Advocate Services.
+  </p>
+
+  <h4>2. No Refund on Advocate Fees</h4>
+  <ul>
+    <li>Any fees paid directly to advocates for legal services are non-refundable</li>
+    <li>Refunds, if any, are subject to mutual agreement between the advocate and the client</li>
+    <li>E-Advocate Services is not responsible for disputes regarding advocate fees, consultations, or outcomes</li>
+  </ul>
+  <p>
+    Professional services are governed by applicable laws and ethical standards
+    prescribed by the Bar Council of India.
+  </p>
+
+  <h4>3. Platform Fees & Subscription Refunds</h4>
+
+  <h3>A. Non-Refundable Situations</h3>
+  <p>
+    Refunds will not be issued in cases of:
+  </p>
+  <ul>
+    <li>Change of mind</li>
+    <li>Dissatisfaction with advocate advice or outcome</li>
+    <li>Inactivity or non-usage after subscription purchase</li>
+    <li>Account suspension due to policy violation</li>
+    <li>Payments made with incorrect user details</li>
+  </ul>
+
+  <h4>B. Refundable Situations (Limited)</h4>
+  <p>
+    Refunds may be considered only if:
+  </p>
+  <ul>
+    <li>A payment was successfully debited but service was not activated</li>
+    <li>Duplicate payment occurred due to a technical error</li>
+    <li>A purchased platform feature is permanently unavailable due to system fault</li>
+  </ul>
+  <p>
+    All refund decisions are at the sole discretion of E-Advocate Services.
+  </p>
+
+  <h4>4. Refund Request Process</h4>
+  <p>
+    To request a refund (where applicable):
+  </p>
+  <ul>
+    <li>📧 Email: <strong>[official support / billing email]</strong></li>
+    <li>📌 Subject: <strong>Refund Request – E-Advocate Services</strong></li>
+  </ul>
+  <p>
+    Please include:
+  </p>
+  <ul>
+    <li>Registered name and email / phone number</li>
+    <li>Payment reference ID</li>
+    <li>Date and amount of payment</li>
+    <li>Reason for refund request</li>
+  </ul>
+  <p>
+    Incomplete refund requests may be rejected.
+  </p>
+
+  <h4>5. Refund Timeline</h4>
+  <ul>
+    <li>Refund requests are reviewed within 7–10 working days</li>
+    <li>Approved refunds (if any) are processed to the original payment method</li>
+    <li>Processing time may vary depending on payment gateway or bank</li>
+  </ul>
+
+  <h4>6. No Guarantee of Legal Outcomes</h4>
+  <p>
+    Refunds will not be granted on the basis of:
+  </p>
+  <ul>
+    <li>Case results</li>
+    <li>Court decisions</li>
+    <li>Legal delays</li>
+    <li>Advocate strategy or advice</li>
+  </ul>
+  <p>
+    E-Advocate Services does not guarantee outcomes of legal matters.
+  </p>
+
+  <h4>7. Chargebacks & Misuse</h4>
+  <ul>
+    <li>Unauthorized chargebacks without contacting support may result in account suspension</li>
+    <li>Fraudulent refund claims may lead to legal action under applicable Indian laws</li>
+  </ul>
+
+  <h4>8. Third-Party Payment Gateways</h4>
+  <p>
+    All payments are processed through third-party payment gateways.
+    Refunds are subject to:
+  </p>
+  <ul>
+    <li>Gateway policies</li>
+    <li>Bank processing timelines</li>
+    <li>Regulatory requirements</li>
+  </ul>
+  <p>
+    E-Advocate Services does not store sensitive financial information.
+  </p>
+
+  <h4>9. Policy Changes</h4>
+  <p>
+    E-Advocate Services reserves the right to modify this Refund Policy at any time.
+    The updated policy will be effective immediately upon publication.
+  </p>
+
+</div>
+
+
+
+    </template>
 
 <!-- footer section  -->
 
@@ -2698,62 +4385,63 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
     <!-- Explore -->
     <div class="footer-col">
       <h4>Explore</h4>
-      <a href="#" data-link="home">Home</a>
+      <a href="#home" data-link="home">Home</a>
       <a href="#" data-link="search">Advance Search</a>
-      <a href="#" data-link="stories">Success Stories</a>
-      <a href="" data-link="file-case">File a Case</a>
-      <a href="#" data-link="blog">Create Blog</a>
-      <a href="#" data-link="status">Case Status</a>
+      <a href="https://filing.ecourts.gov.in/pdedev/" target="_blank" rel="noopener noreferrer">File a Case</a>
+      <a href="https://services.ecourts.gov.in/ecourtindia_v6/" target="_blank" rel="noopener noreferrer">Case Status</a>
+      <a href="#mainblogs" data-link="blog">Create Blog</a>
     </div>
 
     <!-- More -->
     <div class="footer-col">
       <h4>More</h4>
-      <a href="#" data-link="membership">Membership Options</a>
-      <a href="#" data-link="careers">Careers</a>
-      <a href="#" data-link="how-it-works">How it Works</a>
+      <a href="#membership" data-link="membership">Membership Options</a>
+      <a href="#careers" data-link="careers">Careers</a>
+      <a href="#Howitworks" data-link="Howitworks">How it Works</a>
       <a href="#" data-link="credits">Credits</a>
-      <a href="#" data-link="sitemap">Site Map</a>
-      <a href="#" data-link="about">About Us</a>
+      <a href="#Sitemap" data-link="Sitemap">Site Map</a>
+      <a href="#ABOUTUS" data-link="ABOUTUS">About Us</a>
     </div>
 
     <!-- For Advocates -->
     <div class="footer-col">
       <h4>For Advocates</h4>
-      <a href="#" data-link="find-clients">Find Clients</a>
-      <a href="#" data-link="adv-how">How it Works</a>
+      <a href="#browsehomepage" data-link="browsehomepage">Find Clients</a>
+      <a href="#Howitworks" data-link="Howitworks">How it Works</a>
     </div>
 
     <!-- For Clients -->
     <div class="footer-col">
       <h4>For Clients</h4>
-      <a href="#" data-link="find-adv">Find Advocates</a>
-      <a href="#" data-link="client-how">How it Works</a>
+      <a href="#browsehomepage" data-link="browsehomepage">Find Advocates</a>
+      <a href="#Howitworks" data-link="Howitworks">How it Works</a>
     </div>
 
     <!-- Help -->
     <div class="footer-col">
       <h4>Help</h4>
-      <a href="#" data-link="help">Help</a>
+      <!-- <a href="#" data-link="help">Help</a> -->
+      <!-- Add this to your footer where you want the contact link -->
+    <a href="#" class="contact-link" onclick="openContactPopup(event)">Help</a> 
       <a href="#" data-link="centers">E-Advocate Centers</a>
     </div>
 
     <!-- Legal -->
     <div class="footer-col">
       <h4>Legal</h4>
-      <a href="#" data-link="fraud">Fraud Alert</a>
-      <a href="#" data-link="terms">Terms of Use</a>
-      <a href="#" data-link="third-party">Third Party Terms of Use</a>
-      <a href="#" data-link="privacy">Privacy Policy</a>
-      <a href="#" data-link="cookies">Cookie Policy</a>
+      <a href="#fruadalert" data-link="fruadalert">Fraud Alert</a>
+      <a href="#termsofuse" data-link="termsofuse">Terms of Use</a>
+      <a href="#third-partyTermsofUse" data-link="third-partyTermsofUse">Third Party Terms of Use</a>
+      <a href="#privacy-policy" data-link="privacy-policy">Privacy Policy</a>
+      <a href="#CookiePolicy" data-link="CookiePolicy">Cookie Policy</a>
     </div>
 
     <!-- Privacy Features -->
     <div class="footer-col">
       <h4>Privacy Features</h4>
-      <a href="#" data-link="summons">Summons / Notices</a>
-      <a href="#" data-link="grievances">Grievances</a>
-      <a href="#" data-link="refund">Refund Policy</a>
+      <a href="#Summons/Notices" data-link="Summons/Notices">Summons / Notices</a>
+      <a href="#Grievances" data-link="Grievances">Grievances</a>
+      <a href="#RefundPolicy" data-link="RefundPolicy">Refund Policy</a>
     </div>
 
   </div>
@@ -2862,7 +4550,48 @@ Here are some Satisfied Customers, We have Provided Our Services In all Fields,
 
 
 
+<script>
+  const searchInput = document.getElementById("site-search");
 
+  const placeholders = [
+    "Search advocates by name",
+    "Search by district or city",
+    "Search legal services",
+    "Search case types",
+    "Search courts or filings"
+  ];
+
+  let index = 0;
+  let interval;
+
+  function startPlaceholderRotation() {
+    interval = setInterval(() => {
+      if (searchInput.value === "") {
+        index = (index + 1) % placeholders.length;
+        searchInput.placeholder = placeholders[index];
+      }
+    }, 1000);
+  }
+
+  function stopPlaceholderRotation() {
+    clearInterval(interval);
+  }
+
+  // Start rotation
+  startPlaceholderRotation();
+
+  // Stop when user focuses / types
+  searchInput.addEventListener("focus", stopPlaceholderRotation);
+  searchInput.addEventListener("input", stopPlaceholderRotation);
+
+  // Resume when input is empty & blurred
+  searchInput.addEventListener("blur", () => {
+    if (searchInput.value === "") {
+      startPlaceholderRotation();
+    }
+  });
+
+</script>
 
 
 

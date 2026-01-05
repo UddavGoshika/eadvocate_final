@@ -1015,6 +1015,178 @@ function loadBlogs() {
    ADVOCATES + FILTER
 ===================================================== */
 
+/* =====================================================
+   ADVOCATES/CLIENTS TOGGLE MODULE
+===================================================== */
+function initAdvocatesClientsToggle() {
+  console.log("Initializing advocates/clients toggle module...");
+  
+  const grid = document.getElementById("grid");
+  const advBtn = document.getElementById("advBtn");
+  const clientBtn = document.getElementById("clientBtn");
+  
+  // Check if required elements exist
+  if (!grid || !advBtn || !clientBtn) {
+    console.warn("Advocates/Clients toggle elements not found - skipping init");
+    return;
+  }
+
+  // Prevent multiple initializations
+  if (grid.dataset.initialized === "true") {
+    return;
+  }
+
+  let currentType = "advocates";
+
+  /* ================= DATA ================= */
+  const toggleAdvocates = [
+    {name:"Sa*** Mi***",role:"Corporate Law",location:"Mumbai",exp:15,meta:"📍 Mumbai • 15+ Years",img:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f"},
+    {name:"Da*** Ch***",role:"Criminal Defense",location:"Delhi",exp:12,meta:"📍 Delhi • 12+ Years",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216"},
+    {name:"Em*** Ro***",role:"Family Law",location:"Bangalore",exp:10,meta:"📍 Bangalore • 10+ Years",img:"https://images.unsplash.com/photo-1544723795-3fb6469f5b39"},
+    {name:"Sa*** Mi***",role:"Corporate Law",location:"Mumbai",exp:15,meta:"📍 Mumbai • 15+ Years",img:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f"},
+    {name:"Da*** Ch***",role:"Criminal Defense",location:"Delhi",exp:12,meta:"📍 Delhi • 12+ Years",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216"},
+    {name:"Em*** Ro***",role:"Family Law",location:"Bangalore",exp:10,meta:"📍 Bangalore • 10+ Years",img:"https://images.unsplash.com/photo-1544723795-3fb6469f5b39"}
+  ];
+
+  const clients = [
+    {name:"Ra*** Ku***",role:"Business Owner",location:"Hyderabad",exp:15,meta:"📍 Hyderabad • Corporate Case",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"},
+    {name:"An*** Sh***",role:"IT Professional",location:"Pune",exp:12,meta:"📍 Pune • Employment Issue",img:"https://images.unsplash.com/photo-1527980965255-d3b416303d12"},
+    {name:"Me*** Pa***",role:"Home Buyer",location:"Chennai",exp:10,meta:"📍 Chennai • Property Case",img:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7"},
+    {name:"Ra*** Ku***",role:"Business Owner",location:"Hyderabad",exp:15,meta:"📍 Hyderabad • Corporate Case",img:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"},
+    {name:"An*** Sh***",role:"IT Professional",location:"Pune",exp:12,meta:"📍 Pune • Employment Issue",img:"https://images.unsplash.com/photo-1527980965255-d3b416303d12"},
+    {name:"Me*** Pa***",role:"Home Buyer",location:"Chennai",exp:10,meta:"📍 Chennai • Property Case",img:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7"}
+  ];
+
+  /* ================= RENDER ================= */
+  function renderToggle(list) {
+    if (!grid) return;
+    
+    grid.innerHTML = "";
+    list.slice(0, 6).forEach(p => {
+      grid.innerHTML += `
+        <div class="blogcard">
+          <div class="blogavatar" style="background-image:url('${p.img}')"></div>
+          <div class="name">${p.name}</div>
+          <div class="role">${p.role}</div>
+          <div class="meta">${p.meta}</div>
+
+          <div class="btn-row">
+            <button class="btn primary" onclick="alert('Interest sent to ${p.name}')">Interest</button>
+            <button class="btn" onclick="alert('Super interest sent to ${p.name}')">Super Interest</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" onclick="alert('Viewing profile of ${p.name}')">View Profile</button>
+            <button class="btn" onclick="alert('Opening chat with ${p.name}')">Chat</button>
+          </div>
+
+          <div class="footer-note">
+            Platform facilitated connection only. No legal advice.
+          </div>
+        </div>`;
+    });
+  }
+
+  /* ================= FILTER LOGIC ================= */
+  window.applyToggleFilters = () => {
+    const loc = document.getElementById("locationFilter")?.value;
+    const exp = document.getElementById("experienceFilter")?.value;
+    const spec = document.getElementById("specializationFilter")?.value;
+
+    const source = currentType === "advocates" ? toggleAdvocates : clients;
+
+    const filtered = source.filter(p => {
+      return (!loc || p.location === loc) &&
+             (!exp || p.exp >= exp) &&
+             (!spec || p.role === spec);
+    });
+
+    renderToggle(filtered);
+  };
+
+  /* ================= TOGGLE ================= */
+  window.showAdvocatesToggle = () => {
+    currentType = "advocates";
+    advBtn.classList.add("active");
+    clientBtn.classList.remove("active");
+    renderToggle(toggleAdvocates);
+    
+    // Reset filters
+    const locationFilter = document.getElementById("locationFilter");
+    const experienceFilter = document.getElementById("experienceFilter");
+    const specializationFilter = document.getElementById("specializationFilter");
+    
+    if (locationFilter) locationFilter.value = "";
+    if (experienceFilter) experienceFilter.value = "";
+    if (specializationFilter) specializationFilter.value = "";
+  };
+
+  window.showClientsToggle = () => {
+    currentType = "clients";
+    clientBtn.classList.add("active");
+    advBtn.classList.remove("active");
+    renderToggle(clients);
+    
+    // Reset filters
+    const locationFilter = document.getElementById("locationFilter");
+    const experienceFilter = document.getElementById("experienceFilter");
+    const specializationFilter = document.getElementById("specializationFilter");
+    
+    if (locationFilter) locationFilter.value = "";
+    if (experienceFilter) experienceFilter.value = "";
+    if (specializationFilter) specializationFilter.value = "";
+  };
+
+  /* ================= EVENT LISTENERS ================= */
+  advBtn.addEventListener("click", window.showAdvocatesToggle);
+  clientBtn.addEventListener("click", window.showClientsToggle);
+
+  // Filter input event listeners
+  const locationFilter = document.getElementById("locationFilter");
+  const experienceFilter = document.getElementById("experienceFilter");
+  const specializationFilter = document.getElementById("specializationFilter");
+  
+  if (locationFilter) locationFilter.addEventListener("change", window.applyToggleFilters);
+  if (experienceFilter) experienceFilter.addEventListener("change", window.applyToggleFilters);
+  if (specializationFilter) specializationFilter.addEventListener("change", window.applyToggleFilters);
+
+  // Initial render
+  renderToggle(toggleAdvocates);
+  
+  // Mark as initialized
+  grid.dataset.initialized = "true";
+  
+  // Cleanup function for SPA
+  window.cleanupToggleModule = () => {
+    advBtn.removeEventListener("click", window.showAdvocatesToggle);
+    clientBtn.removeEventListener("click", window.showClientsToggle);
+    
+    if (locationFilter) locationFilter.removeEventListener("change", window.applyToggleFilters);
+    if (experienceFilter) experienceFilter.removeEventListener("change", window.applyToggleFilters);
+    if (specializationFilter) specializationFilter.removeEventListener("change", window.applyToggleFilters);
+    
+    delete window.showAdvocatesToggle;
+    delete window.showClientsToggle;
+    delete window.applyToggleFilters;
+    delete window.cleanupToggleModule;
+    
+    grid.dataset.initialized = "false";
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const advocates = [
   {
     name: "Sarah Mitchell",
@@ -1255,6 +1427,294 @@ function updateNavbarAuth() {
 }
 
 
+
+
+
+
+
+
+// file a case and case stauts js logic 
+
+// =====================================================
+// MULTIPLE SLIDERS INITIALIZATION (For multiple .slider-box containers)
+// =====================================================
+function initMultiSliders() {
+  const sliderBoxes = document.querySelectorAll(".slider-box");
+  if (!sliderBoxes.length) return;
+
+  sliderBoxes.forEach(sliderBox => {
+    const slides = sliderBox.querySelectorAll(".slide");
+    const prevBtn = sliderBox.querySelector(".prev");
+    const nextBtn = sliderBox.querySelector(".next");
+    const dotsWrap = sliderBox.querySelector(".dots");
+
+    if (!slides.length) return;
+
+    let current = 0;
+
+    // CREATE DOTS
+    // Clear existing dots first
+    dotsWrap.innerHTML = '';
+    slides.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = "dot";
+      if (i === 0) dot.classList.add("active");
+      dotsWrap.appendChild(dot);
+
+      dot.addEventListener("click", () => {
+        showSlide(i);
+      });
+    });
+
+    const dots = dotsWrap.querySelectorAll(".dot");
+
+    function showSlide(index) {
+      slides[current]?.classList.remove("active");
+      dots[current]?.classList.remove("active");
+
+      current = index;
+
+      slides[current]?.classList.add("active");
+      dots[current]?.classList.add("active");
+    }
+
+    function nextSlide() {
+      showSlide((current + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      showSlide((current - 1 + slides.length) % slides.length);
+    }
+
+    // BUTTON EVENTS
+    nextBtn?.addEventListener("click", nextSlide);
+    prevBtn?.addEventListener("click", prevSlide);
+
+    // AUTO PLAY
+    let sliderInterval;
+    function startAutoPlay() {
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 5000);
+    }
+    
+    function stopAutoPlay() {
+      clearInterval(sliderInterval);
+    }
+    
+    // Start auto play
+    startAutoPlay();
+    
+    // Pause on hover
+    sliderBox.addEventListener("mouseenter", stopAutoPlay);
+    sliderBox.addEventListener("mouseleave", startAutoPlay);
+
+    // Mark as initialized to prevent duplicate initialization
+    sliderBox.dataset.initialized = "true";
+  });
+}
+
+
+/* =====================================================
+   BLOG GRID MODULE (Infinite Scroll + Modal)
+===================================================== */
+function initBlogGrid() {
+  console.log("Initializing blog grid module...");
+  
+  const blogGrid = document.getElementById('blog-grid');
+  const loader = document.getElementById('loader');
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modal-body');
+  const modalLoader = document.getElementById('modal-loader');
+  const closeBtn = document.getElementById('close-btn');
+
+  // Check if required elements exist
+  if (!blogGrid || !modal || !modalBody) {
+    console.warn("Blog grid elements not found - skipping initBlogGrid");
+    return;
+  }
+
+  let previewPage = 1;
+  let modalPage = 1;
+  let previewLoading = false;
+  let modalLoading = false;
+  let isInitialized = false;
+
+  const authors = [
+    { name: "Adv. Priya Sharma", avatar: "https://i.pravatar.cc/150?img=3" },
+    { name: "Adv. Rajesh Kumar", avatar: "https://i.pravatar.cc/150?img=8" },
+    { name: "Adv. Neha Patel", avatar: "https://i.pravatar.cc/150?img=12" },
+    { name: "Adv. Arjun Singh", avatar: "https://i.pravatar.cc/150?img=15" }
+  ];
+
+  const imageOptions = [
+    "https://purdyimmigrationlawyer.com/wp-content/uploads/2021/12/Florida-Immigration-Lawyer-1.jpg",
+    "https://static.wixstatic.com/media/267f0e_682dfbd00e004687ac30874e538037f3~mv2.gif",
+    "https://davarilaw.com/wp-content/uploads/2022/10/DavariLaw_Book-a-Consultation.jpg",
+    "https://www.shutterstock.com/shutterstock/photos/2105596577/display_1500/stock-vector-online-lawyer-service-mobile-app-or-law-consultation-platform-professional-lawyer-service-online-2105596577.jpg",
+    "https://aktiwari.com/wp-content/uploads/2021/06/aktiwari-process-to-change-lawyer.jpg",
+    "https://thumbs.dreamstime.com/b/gavel-scale-justice-law-book-close-up-view-judge-s-gavel-resting-law-book-next-to-golden-scale-justice-376176620.jpg",
+    "https://media.istockphoto.com/id/1186098701/photo/law.jpg?s=612x612&w=0&k=20&c=qENWKtzA5DIb0RjNkIqVB9ocBl-_PsdMve4cPj8ifKE=",
+    "https://img.freepik.com/premium-photo/scales-justice-with-gavel-law-books-symbol-legal-profession-courtroom-justice_1293074-136952.jpg",
+    null // For no image
+  ];
+
+  const topics = [
+    "The Rise of E-Advocate Services: Accessing Legal Help Anytime, Anywhere",
+    "Benefits of Online Legal Consultations in India",
+    "How Virtual Lawyer Meetings Save Time and Money",
+    "Top Platforms for E-Advocate Services: Vakilsearch, LegalKart, LawRato",
+    "Is Online Legal Advice Safe and Confidential?",
+    "Family Law Matters: Get Quick Advice from Expert Advocates Online",
+    "Property Disputes Resolved Faster with Digital Legal Services",
+    "Consumer Rights Protection Through E-Advocacy",
+    "Drafting Contracts and Agreements Digitally: The Future of Legal Documentation",
+    "Criminal Law Consultation: Immediate Help via Video Call"
+  ];
+
+  function generateBlog(id) {
+    const author = authors[id % authors.length];
+    const hasImage = Math.random() > 0.3; // 70% have image
+    const image = hasImage ? imageOptions[id % (imageOptions.length - 1)] : null;
+    const topicIndex = (id - 1) % topics.length;
+    return {
+      id,
+      title: topics[topicIndex],
+      excerpt: `Explore key insights on e-advocate services and how online legal platforms are transforming access to justice in India.`,
+      content: `<p>In today's digital age, e-advocate services have revolutionized the way individuals and businesses seek legal advice. Platforms like Vakilsearch, LegalKart, LawRato, and others offer instant online consultations with verified lawyers, making legal help accessible 24/7.</p>
+                <p>Key benefits include convenience (no need to travel), cost savings (affordable rates starting from low per-minute fees), privacy (secure encrypted sessions), and speed (immediate connection to experts in family, property, criminal, corporate, and consumer law).</p>
+                <p>Whether you're dealing with a divorce, property dispute, contract drafting, or consumer complaint, virtual meetings with experienced advocates ensure you get professional guidance without leaving home. These services are fully compliant with Indian laws, maintaining confidentiality and ethical standards.</p>
+                <p>As legal tech grows in India, e-advocacy bridges the justice gap, especially for rural areas and busy professionals. Embrace the future of law – get reliable, fast, and affordable legal support online today.</p>`,
+      image,
+      author: author.name,
+      authorAvatar: author.avatar,
+      date: new Date(2026, (id % 11), (id % 28) + 1).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    };
+  }
+
+  function createPreviewCard(blog) {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.innerHTML = `
+      ${blog.image ? `<img src="${blog.image}" alt="${blog.title}">` : ''}
+      <div class="blog-card-content">
+        <h3>${blog.title}</h3>
+        <p>${blog.excerpt}</p>
+        <button class="read-more-btn">Read All Articles</button>
+      </div>
+    `;
+    return card;
+  }
+
+  function createFullBlog(blog) {
+    const div = document.createElement('div');
+    div.className = 'modal-blog';
+    div.innerHTML = `
+      ${blog.image ? `<img src="${blog.image}" alt="${blog.title}" class="blog-featured-img">` : ''}
+      <div class="blog-meta">
+        <img src="${blog.authorAvatar}" alt="${blog.author}" class="author-avatar">
+        <div>
+          <div class="author-name">${blog.author}</div>
+          <div>${blog.date}</div>
+        </div>
+        <div class="blog-date">${blog.date}</div>
+      </div>
+      <h2>${blog.title}</h2>
+      ${blog.content}
+    `;
+    return div;
+  }
+
+  function loadPreviews() {
+    if (previewLoading) return;
+    previewLoading = true;
+    if (loader) loader.style.display = 'block';
+
+    setTimeout(() => {
+      for (let i = 1; i <= 9; i++) {
+        const id = (previewPage - 1) * 9 + i;
+        const blog = generateBlog(id);
+        blogGrid.appendChild(createPreviewCard(blog));
+      }
+
+      document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.onclick = () => {
+          modal.style.display = 'flex';
+          if (modalBody.children.length === 0) {
+            loadModalBlogs();
+          }
+        };
+      });
+
+      previewPage++;
+      previewLoading = false;
+      if (loader) loader.style.display = 'none';
+    }, 800);
+  }
+
+  function loadModalBlogs() {
+    if (modalLoading) return;
+    modalLoading = true;
+    if (modalLoader) modalLoader.style.display = 'block';
+
+    setTimeout(() => {
+      for (let i = 1; i <= 4; i++) {
+        const id = (modalPage - 1) * 4 + i;
+        const blog = generateBlog(id);
+        modalBody.appendChild(createFullBlog(blog));
+      }
+      modalPage++;
+      modalLoading = false;
+      if (modalLoader) modalLoader.style.display = 'none';
+    }, 800);
+  }
+
+  // Initialize scroll handlers only once
+  if (!isInitialized) {
+    // Initial load
+    loadPreviews();
+
+    // Infinite scroll - preview grid
+    const scrollHandler = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+        loadPreviews();
+      }
+    };
+    
+    // Infinite scroll - inside modal
+    const modalScrollHandler = () => {
+      if (modalBody.scrollTop + modalBody.clientHeight >= modalBody.scrollHeight - 300) {
+        loadModalBlogs();
+      }
+    };
+
+    // Add event listeners
+    window.addEventListener('scroll', scrollHandler);
+    modalBody.addEventListener('scroll', modalScrollHandler);
+
+    // Close modal
+    closeBtn.onclick = () => modal.style.display = 'none';
+    modal.onclick = (e) => { 
+      if (e.target === modal) modal.style.display = 'none'; 
+    };
+
+    // Mark as initialized
+    isInitialized = true;
+    
+    // Store references for cleanup if needed
+    blogGrid.dataset.initialized = "true";
+    
+    // Cleanup function for SPA
+    window.cleanupBlogGrid = () => {
+      window.removeEventListener('scroll', scrollHandler);
+      modalBody.removeEventListener('scroll', modalScrollHandler);
+      delete window.cleanupBlogGrid;
+      isInitialized = false;
+    };
+  }
+}
+
+
+
 /* =====================================================
    SPA ROUTER
 ===================================================== */
@@ -1262,6 +1722,8 @@ const app = $("#app");
 
 function initHome() {
   safe(initSlider);
+    safe(initMultiSliders); // ✅ Add this for multiple sliders
+
   safe(loadBlogs);
   safe(() => renderAdvocates(advocates));
   safe(initContact);
@@ -1331,8 +1793,34 @@ if (route === "blogs") initBlogPage();
       initadvocateDashboard();
     }
 
+
+    // ✅ ADD THESE CHECKS
+    // Initialize blog grid when needed
+    if (document.getElementById('blog-grid')) {
+      safe(initBlogGrid);
+    }
+    
+    // Initialize advocates/clients toggle when needed
+    if (document.getElementById('grid') && 
+        document.getElementById('advBtn') && 
+        document.getElementById('clientBtn')) {
+      safe(initAdvocatesClientsToggle);
+    }
+    
+    // Initialize multiple sliders when needed
+    safe(initMultiSliders);
+    
     updateNavbarAuth();
     window.scrollTo(0, 0);
+    
+    // Store cleanup if the page has one
+    if (typeof window.cleanupToggleModule === 'function') {
+      currentPageCleanup = window.cleanupToggleModule;
+    } else if (typeof window.cleanupBlogGrid === 'function') {
+      currentPageCleanup = window.cleanupBlogGrid;
+    }
+
+
   });
 }
 
@@ -1719,6 +2207,109 @@ function initBlogPage() {
 
 
 
+
+/* =====================================================
+   CONTACT POPUP FUNCTIONS
+===================================================== */
+
+// Open contact popup
+function openContactPopup(e) {
+  if (e) e.preventDefault();
+  
+  // Check if popup already exists
+  let popup = document.getElementById('tatitoContactPopup');
+  if (popup) {
+    popup.style.display = 'flex';
+    return;
+  }
+  
+  // Create popup from template
+  const template = document.getElementById('contactPopupTemplate');
+  if (!template) {
+    console.error('Contact popup template not found');
+    return;
+  }
+  
+  const clone = template.content.cloneNode(true);
+  document.body.appendChild(clone);
+  
+  // Add escape key listener
+  document.addEventListener('keydown', handleContactPopupEscape);
+  
+  // Focus the popup for accessibility
+  setTimeout(() => {
+    const popupContainer = document.querySelector('.tatito-popup-container');
+    popupContainer?.focus();
+  }, 100);
+}
+
+// Close contact popup
+function closeContactPopup(e) {
+  if (e) {
+    // If clicked on overlay
+    if (e.target.classList.contains('tatito-popup-overlay')) {
+      e.preventDefault();
+    }
+    // If clicked on close button
+    else if (e.target.classList.contains('tatito-popup-close') || 
+             e.target.classList.contains('tatito-close-btn')) {
+      e.preventDefault();
+    }
+  }
+  
+  const popup = document.getElementById('tatitoContactPopup');
+  if (popup) {
+    popup.style.display = 'none';
+  }
+  
+  // Remove escape key listener
+  document.removeEventListener('keydown', handleContactPopupEscape);
+}
+
+// Handle escape key
+function handleContactPopupEscape(e) {
+  if (e.key === 'Escape') {
+    closeContactPopup();
+  }
+}
+
+// Copy contact details to clipboard
+function copyContactDetails() {
+  const contactInfo = `E-Advocate Support Contact Details:
+  
+📞 Phone: +91 70937 04706
+📧 Email: tatitoprojects@gmail.com
+📧 Email: support@tatitoprojects.com
+⏰ Hours: Mon-Fri 10 AM - 6 PM IST, Sat 10 AM - 2 PM IST
+
+For urgent legal matters, contact local authorities.
+`;
+  
+  navigator.clipboard.writeText(contactInfo)
+    .then(() => {
+      const btn = document.querySelector('.tatito-copy-btn');
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.style.backgroundColor = '#4CAF50';
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.backgroundColor = '';
+      }, 2000);
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+      alert('Failed to copy to clipboard. Please copy manually.');
+    });
+}
+
+// Initialize contact popup (call this in your SPA router)
+function initContactPopup() {
+  // Add event listeners to all contact links
+  document.querySelectorAll('.contact-link').forEach(link => {
+    link.addEventListener('click', openContactPopup);
+  });
+}
 
 
 
